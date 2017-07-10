@@ -1,0 +1,131 @@
+/* Different ESA logo than used on most of the other layouts. */
+#esaLogoCustom {
+	background-image: url('../images/esa-logo-16_9-3p.png');
+	left: 767px;
+	top: 6px;
+	width: 389px;
+	height: 122px;
+}
+
+/* Logos/sponsors */
+#sponsorImageAreaNormal {
+	left: 762px;
+	top: 315px;
+	width: 396px;
+	height: 170px;
+}
+
+#sponsorImageAreaPremium {
+	left: 762px;
+	top: 135px;
+	width: 396px;
+	height: 170px;
+}
+
+/* Webcam(s) */
+#webcam1 {
+	left: 0px;
+	top: 0px;
+	width: 747px;
+	height: 495px;
+}
+
+/* Game area(s) */
+.gameCapture {
+	width: 747px;
+	height: 420px;
+}
+
+#gameCapture1 {
+	left: 1173px;
+	top: 75px;
+	
+	/* This positions the finish time in this game feed. */
+	align-items: flex-start; /* Top of viewport. */
+	justify-content: flex-start; /* Left of viewport. */
+}
+
+#gameCapture2 {
+	left: 0px;
+	top: 500px;
+	
+	/* This positions the finish time in this game feed. */
+	align-items: flex-end; /* Bottom of viewport. */
+	justify-content: flex-end; /* Right of viewport. */
+}
+
+#gameCapture3 {
+	left: 1173px;
+	top: 500px;
+	
+	/* This positions the finish time in this game feed. */
+	align-items: flex-end; /* Bottom of viewport. */
+	justify-content: flex-start; /* Left of viewport. */
+}
+
+/* Finish timer stuff */
+.finishTimeContainer img {padding-right: 5px;}
+#finishTimeContainer1 {
+	font-size: 25px;
+	height: 30px;
+	padding: 0 5px 5px 0; /* No padding needed where this box touches the border. */
+}
+#finishTimeContainer2 {
+	font-size: 25px;
+	height: 30px;
+	padding: 5px 0 0 5px; /* No padding needed where this box touches the border. */
+}
+#finishTimeContainer3 {
+	font-size: 25px;
+	height: 30px;
+	padding: 5px 5px 0 0; /* No padding needed where this box touches the border. */
+}
+
+/* Player information stuff */
+.playerContainer {
+	width: 747px;
+	height: 70px;
+	padding: 5px;
+}
+
+#playerContainer1 {
+	left: 1173px;
+	top: 0px;
+}
+
+#playerContainer2 {
+	left: 0px;
+	top: 925px;
+}
+
+#playerContainer3 {
+	left: 1173px;
+	top: 925px;
+}
+
+.playerLogo {padding-right: 15px;} /* Space between player logo on left and player name text. */
+.playerText {font-size: 29px;}
+.playerFlag, .playerCoOp {padding-left: 5px;}
+
+/* Run information stuff */
+#runInfoContainer {
+	left: 752px;
+	top: 500px;
+	width: 416px;
+	height: 280px;
+}
+
+#runInfoContainer #gameTitle {font-size: 30px;}
+#runInfoContainer #gameCategory, #runInfoContainer #gameConsole {font-size: 26px;}
+
+/* Timer stuff*/
+#timerContainer {
+	left: 752px;
+	top: 785px;
+	width: 416px;
+	height: 210px;
+}
+
+/* Margins might need playing around with and some eyeballing to get timer text closer and still centered. */
+#timerContainer #timer {font-size: 91px; margin: -10px;}
+#timerContainer #gameEstimate {font-size: 45px; margin: -5px;}

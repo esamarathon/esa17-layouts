@@ -1,0 +1,96 @@
+/* Logos/sponsors */
+#sponsorImageAreaNormal {
+	left: 1280px;
+	top: 831px;
+	width: 630px;
+	height: 169px;
+}
+
+/* Webcam(s) */
+#webcam1 {
+	left: 655px;
+	top: 652px;
+	width: 610px;
+	height: 343px;
+}
+
+/* Game area(s) */
+.gameCapture {
+	width: 810px;
+	height: 540px;
+}
+
+#gameCapture1 {
+	left: 98px;
+	top: 107px;
+	
+	/* This positions the finish time in this game feed. */
+	align-items: flex-end; /* Bottom of viewport. */
+	justify-content: flex-start; /* Left of viewport. */
+}
+
+#gameCapture2 {
+	left: 1016px;
+	top: 107px;
+	
+	/* This positions the finish time in this game feed. */
+	align-items: flex-end; /* Bottom of viewport. */
+	justify-content: flex-end; /* Right of viewport. */
+}
+
+/* Finish timer stuff */
+.finishTimeContainer img {padding-right: 5px;}
+#finishTimeContainer1 {
+	font-size: 25px;
+	height: 30px;
+	padding: 5px 5px 0 0; /* No padding needed where this box touches the border. */
+}
+#finishTimeContainer2 {
+	font-size: 25px;
+	height: 30px;
+	padding: 5px 0 0 5px; /* No padding needed where this box touches the border. */
+}
+
+/* Player information stuff */
+.playerContainer {
+	width: 650px;
+	height: 64px;
+	padding: 5px;
+}
+
+#playerContainer1 {
+	left: 0px;
+	top: 652px;
+}
+
+#playerContainer2 {
+	left: 1270px;
+	top: 652px;
+}
+
+.playerLogo {padding-right: 15px;} /* Space between player logo on left and player name text. */
+.playerText {font-size: 28px;}
+.playerFlag, .playerCoOp {padding-left: 5px;}
+
+/* Run information stuff */
+#runInfoContainer {
+	left: 0px;
+	top: 721px;
+	width: 650px;
+	height: 274px;
+}
+
+#runInfoContainer #gameTitle {font-size: 33px;}
+#runInfoContainer #gameCategory, #runInfoContainer #gameConsole {font-size: 28px;}
+
+/* Timer stuff*/
+#timerContainer {
+	left: 1270px;
+	top: 721px;
+	width: 650px;
+	height: 95px;
+}
+
+/* Margins might need playing around with and some eyeballing to get timer text closer and still centered. */
+#timerContainer #timer {font-size: 78px; margin: 15px;}
+#timerContainer #gameEstimate {font-size: 35px; margin: 15px;}

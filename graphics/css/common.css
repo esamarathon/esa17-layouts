@@ -1,0 +1,126 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:600');
+
+/* Some general settings used for everything and other minor changes to the body. */
+body {
+	font-family: 'Montserrat', sans-serif;
+	color: white;
+	overflow: hidden;
+	margin: 0;
+	padding: 0;
+}
+
+/* This container is basically just for the background image. */
+#windowContainer {
+	position: fixed;
+	left: 0px;
+	top: 0px;
+	background-image: url('../images/background-1.png');
+	background-repeat: no-repeat;
+	background-size: cover;
+	width: 1920px;
+	height: 1080px;
+	overflow: hidden;
+	margin: 0;
+	padding: 0;
+}
+
+/* All areas that store something. */
+/* A slightly transparent black background with 5px purple border. */
+.storageBox {
+	position: fixed;
+	background-color: rgba(0,0,0,0.68);
+	outline: 5px solid #662d91;
+	box-sizing: border-box;
+	overflow: hidden;
+}
+
+/* Most (if not all) information areas use flex so these are some default settings for those. */
+.flexContainer {
+	display: flex;
+	align-items: center; /* Aligns vertically. */
+	justify-content: center; /* Aligns horizontally. */
+	height: inherit;
+	text-align: center;
+}
+
+/* Used in combination with above to give it a green background instead for games/cams. */
+.gameCapture, .webcam {background-color: #00DD00;}
+
+/* Small "same colour as borders" box that appears in the game feeds when players finish in a race. */
+.finishTimeContainer {background-color: #662d91;}
+.finishTimeContainer img {content: url('../images/finish-flag.gif'); height: 100%; image-rendering: pixelated;}
+
+/* General setings for displaying our logo. */
+.esaLogo {
+	position: fixed;
+	background-repeat: no-repeat;
+	background-size: 100%;
+}
+
+/* This logo image is used on a lot of layouts in the same space, so everything is defined here. */
+#esaLogoLong {
+	background-image: url('../images/esa-logo-long.png');
+	left: 12px;
+	top: 5px;
+	width: 1527px;
+	height: 91px;
+}
+
+/* The colour for this text is always grey. */
+#runInfoContainer #gameConsole, #timerContainer #gameEstimate {color:#bfbfbf;}
+
+/* Give the run info box some default side padding. */
+#runInfoContainer {padding: 0 10px;}
+
+/* Image classes for logo on the left of player name. */
+/* Right now, these images must both be the same size to not mess up animations or look stupid. */
+.nameLogo {content: url('../images/player-logo.png');}
+.twitchLogo {content: url('../images/twitch-logo.png');}
+
+.playerText {
+	overflow: hidden; /* In case the player name is really long, stop it from ruining the box and just hide the end. */
+	flex: auto;
+	text-align: left; /* Overriding some default centering I have for most other stuff. */
+}
+
+/*.playerFlag {content: url('../images/flag.png');}*/ /* Flag image is changed dynamically to something else. */
+.playerCoOp {content: url('../images/team-icon.png');}
+
+/* Turns flag/co-op icon and finish time container off by default. */
+.playerFlag, .playerCoOp {display: none;}
+.finishTimeContainer {opacity: 0;} /* Using opacity so the image is loaded in while invisible. */
+
+/* Makes these images fill up all the space they can. */
+.playerLogo, .playerFlag, .playerCoOp {height: 100%; box-sizing: border-box;}
+
+/* Different colours for each state the timer can be in. */
+.timer_paused {color: yellow;}
+.timer_running {color: white}
+.timer_stopped {color: gray;}
+.timer_finished {color: rgb(0,127,0);}
+
+/* Each character in the timer is in a span; setting width so the numbers appear monospaced. */
+#timer span {
+	display: inline-block;
+	width: 0.65em;
+	text-align: center;
+}
+#timer .char3, #timer .char6 {width: 0.3em;}
+
+/* Adds text to start and end of estimate. */
+#gameEstimate:before {content: 'EST: ';}
+#gameEstimate:after {content: ':00';}
+
+/* Not sure how sponsor images are working yet, so a temporary black box for now. */
+.sponsorImageArea {
+	position: fixed;
+	background-color: black;
+}
+
+/* This sponsor image is used on a lot of layouts in the same space, so everything is defined here. */
+#sponsorImageAreaTopPremium {
+	left: 1552px;
+	top: 5px;
+	width: 363px;
+	height: 92px;
+}

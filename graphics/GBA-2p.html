@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html data-sceneid="GBA-2p">
+<head>
+	<meta charset="UTF-8">
+	
+	<!-- CSS -->
+	<link href="css/common.css" rel="stylesheet"/>
+	<link href="css/GBA-2p.css" rel="stylesheet"/>
+</head>
+<body>
+<div id="windowContainer">
+	<!-- Logos/Sponsors -->
+	<div id="esaLogoLong" class="esaLogo"></div>
+	<div class="sponsorImageArea" id="sponsorImageAreaNormal"></div>
+	<div class="sponsorImageArea" id="sponsorImageAreaTopPremium"></div>
+	
+	<!-- Webcam(s) -->
+	<div id="webcam1" class="storageBox webcam"></div>
+	
+	<!-- Game area(s) -->
+	<div id="gameCapture1" class="storageBox gameCapture flexContainer">
+		<!-- Finish time -->
+		<div id="finishTimeContainer1" class="finishTimeContainer flexContainer">
+			<img>
+			<div id="finishTime"></div>
+		</div>
+	</div>
+	<div id="gameCapture2" class="storageBox gameCapture flexContainer">
+		<!-- Finish time -->
+		<div id="finishTimeContainer2" class="finishTimeContainer flexContainer">
+			<img>
+			<div id="finishTime"></div>
+		</div>
+	</div>
+	
+	<!-- Player 1 information -->
+	<div id="playerContainer1" class="storageBox playerContainer flexContainer">
+		<img class="playerLogo nameLogo">
+		<div class="playerText"></div>
+		<img class="playerFlag"><!-- Pac loves these things dude. -->
+		<img class="playerCoOp">
+	</div>
+	<div id="playerContainer2" class="storageBox playerContainer flexContainer">
+		<img class="playerLogo nameLogo">
+		<div class="playerText"></div>
+		<img class="playerFlag"><!-- Pac loves these things dude. -->
+		<img class="playerCoOp">
+	</div>
+	
+	<!-- Run information -->
+	<div id="runInfoContainer" class="storageBox flexContainer">
+		<div><!-- An extra div is needed to make sure all of these are on individual lines. -->
+			<div id="gameTitle"></div>
+			<div id="gameCategory"></div>
+			<div id="gameConsole"></div>
+		</div>
+	</div>
+	
+	<!-- Timer -->
+	<div id="timerContainer" class="storageBox flexContainer">
+		<!-- No extra div here (in this layout these are both on the same line). -->
+		<div id="timer"></div>
+		<div id="gameEstimate"></div>
+	</div>
+</div>
+</body>
+</html>

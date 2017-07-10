@@ -1,0 +1,82 @@
+/* Logos/sponsors */
+#sponsorImageAreaNormal {
+	left: 10px;
+	top: 544px;
+	width: 158px;
+	height: 321px;
+}
+
+/* Webcam(s) */
+#webcam1 {
+	left: 0px;
+	top: 107px;
+	width: 638px;
+	height: 358px;
+}
+
+/* Game area(s) */
+#gameCapture1 {
+	left: 643px;
+	top: 107px;
+	width: 1277px;
+	height: 768px;
+	
+	/* This positions the finish time in this game feed. */
+	align-items: flex-end; /* Bottom of viewport. */
+	justify-content: flex-start; /* Left of viewport. */
+}
+
+/* 2nd 3DS screen */
+#gameCapture1B {
+	left: 182px;
+	top: 534px;
+	width: 455px;
+	height: 341px;
+}
+
+/* Finish timer stuff */
+.finishTimeContainer img {padding-right: 5px;}
+#finishTimeContainer1 {
+	font-size: 25px;
+	height: 30px;
+	padding: 5px 5px 0 0; /* No padding needed where this box touches the border. */
+}
+
+/* Player information stuff */
+.playerContainer {
+	width: 638px;
+	height: 59px;
+	padding: 5px;
+}
+
+#playerContainer1 {
+	left: 0px;
+	top: 470px;
+}
+
+.playerLogo {padding-right: 15px;} /* Space between player logo on left and player name text. */
+.playerText {font-size: 28px;}
+.playerFlag, .playerCoOp {padding-left: 5px;}
+
+/* Run information stuff */
+#runInfoContainer {
+	left: 643px;
+	top: 880px;
+	width: 1277px;
+	height: 115px;
+}
+
+#runInfoContainer #gameTitle {font-size: 33px;}
+#runInfoContainer #gameCategory, #runInfoContainer #gameConsole {font-size: 28px;}
+
+/* Timer stuff*/
+#timerContainer {
+	left: 0px;
+	top: 880px;
+	width: 638px;
+	height: 116px;
+}
+
+/* Margins might need playing around with and some eyeballing to get timer text closer and still centered. */
+#timerContainer #timer {font-size: 78px; margin: 10px;}
+#timerContainer #gameEstimate {font-size: 35px; margin: 10px;}

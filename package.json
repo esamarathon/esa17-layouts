@@ -1,0 +1,100 @@
+{
+  "name": "esa17-layouts",
+  "version": "0.0.0",
+  "description": "",
+  "homepage": "",
+  "author": {
+    "name": "zoton2",
+    "email": "zoton2@gmail.com",
+    "url": ""
+  },
+  "files": [
+    "dashboard",
+    "graphics",
+    "extension.js",
+    "extension"
+  ],
+  "keywords": [
+    "",
+    "nodecg-bundle"
+  ],
+  "nodecg": {
+    "compatibleRange": "~0.8.0",
+    "dependencies": [
+      "speedcontrol/nodecg-speedcontrol:~0.8"
+    ],
+    "graphics": [
+      {
+        "file": "4_3-1p.html",
+        "width": 1920,
+        "height": 1080
+      },
+      {
+        "file": "4_3-2p.html",
+        "width": 1920,
+        "height": 1080
+      },
+      {
+        "file": "4_3-3p.html",
+        "width": 1920,
+        "height": 1080
+      },
+      {
+        "file": "4_3-4p.html",
+        "width": 1920,
+        "height": 1080
+      },
+      {
+        "file": "16_9-1p.html",
+        "width": 1920,
+        "height": 1080
+      },
+      {
+        "file": "16_9-2p.html",
+        "width": 1920,
+        "height": 1080
+      },
+      {
+        "file": "16_9-3p.html",
+        "width": 1920,
+        "height": 1080
+      },
+      {
+        "file": "16_9-4p.html",
+        "width": 1920,
+        "height": 1080
+      },
+      {
+        "file": "GB-1p.html",
+        "width": 1920,
+        "height": 1080
+      },
+      {
+        "file": "GB-2p.html",
+        "width": 1920,
+        "height": 1080
+      },
+      {
+        "file": "GBA-1p.html",
+        "width": 1920,
+        "height": 1080
+      },
+      {
+        "file": "GBA-2p.html",
+        "width": 1920,
+        "height": 1080
+      },
+      {
+        "file": "3DS-1p.html",
+        "width": 1920,
+        "height": 1080
+      },
+      {
+        "file": "9_16-1p.html",
+        "width": 1920,
+        "height": 1080
+      }
+    ]
+  },
+  "license": "Apache-2.0"
+}
