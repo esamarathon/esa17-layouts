@@ -1,4 +1,9 @@
 'use strict';
+
+// Current setup for how teams are treated:
+// All teams (teams can be just 1 runner) have their own container
+// EXCEPT if there is 1 team and they have >1 player.
+
 $(function() {
 	// The bundle name where all the run information is pulled from.
 	var speedcontrolBundle = 'nodecg-speedcontrol';
@@ -7,11 +12,12 @@ $(function() {
 	var playerContainers = $('.playerContainer'); // Array
 	
 	// Declaring other variables.
-	//var displayTwitchFor = 15000;
-	var displayTwitchFor = 14000;
-	//var displayNameFor = 45000;
-	var displayNameFor = 7000;
-	var teamOn1Display = $('.gameCapture').length === 1; // 1 team >2 displays if there is >1 game capture.
+	var displayNameFor = 45000;
+	var displayTwitchFor = 15000;
+	var teamMemberIndex = []; // Stores what team member of each team is currently being shown.
+	var currentTeamsData = []; // All teams data is stored here for reference when changing.
+	var rotationTimeout; // Stores the timeout used for switching between name and twitch.
+	var init = true; // Tracks if this is the first time things are being shown since changing.
 	
 	var runDataActiveRunReplicant = nodecg.Replicant('runDataActiveRun', speedcontrolBundle);
 	runDataActiveRunReplicant.on('change', function(newValue, oldValue) {
@@ -19,57 +25,100 @@ $(function() {
 	});
 	
 	function updateSceneFields(runData) {
-		console.log(JSON.stringify(runData));
+		// Reset important stuff.
+		currentTeamsData = [];
+		teamMemberIndex = [];
+		clearTimeout(rotationTimeout);
+		init = true;
 		
-		// clean up stuff from last time
+		// If there are multiple player info boxes but only 1 team and they have >1 player,
+		// puts the names in their own boxes. This is done by making them into "fake" 1 player
+		// teams but with a toggle to show the team icon.
+		if (playerContainers.length > 1 && runData.teams.length === 1 && runData.teams[0].members.length > 1) {
+			var team = runData.teams[0];
+			team.members.forEach(function(member) {
+				var teamData = {showTeamIcon: team.members.length > 1, members: []};
+				teamData.members.push(createMemberData(member));
+				currentTeamsData.push(teamData);
+			});
+		}
 		
-		// 1 team only.
-		if (runData.teams.length === 1) {
-			// 1 player only.
-			if (runData.teams[0].members.length === 1) {
-				configurePlayerContainer(0, runData.teams[0].members[0]);
-			}
-			
-			// >1 player.
-			else if (runData.teams[0].members.length > 1) {
-				// Will display all names in one box.
-				if (teamOn1Display) {
-					
-				}
+		else {
+			runData.teams.forEach(function(team) {
+				var teamData = {showTeamIcon: team.members.length > 1, members: []};
+				team.members.forEach(function(member) {teamData.members.push(createMemberData(member));});
+				currentTeamsData.push(teamData);
+			});
+		}
+		
+		// Set up team member indices so we can keep track on what team member is being shown.
+		for (var i = 0; i < currentTeamsData.length; i++) {teamMemberIndex[i] = 0;}
+		
+		showNames();
+	}
+	
+	// Change to showing usernames.
+	function showNames() {
+		// If this is the first run, clean out player containers not needed.
+		if (init && currentTeamsData.length < playerContainers.length) {
+			for (var i = currentTeamsData.length; i < playerContainers.length; i++) {
+				animationCleanPlayerData(playerContainers[i]);
 			}
 		}
 		
-		// More than 1 team (usually singular people in races).
-		else if (runData.teams.length > 1) {
-			// All teams have 1 player in them; normal race.
-			if (runData.teams.length === runData.players.length) {
-				
-			}
+		for (var i = 0; i < teamMemberIndex.length; i++) {
+			if (!playerContainers[i]) break; // Skip if there's no container for this team.
+			var index = teamMemberIndex[i]; // Who the current player is who should be shown in this team.
 			
-			// >1 team with >1 players in each. Not supported yet.
-			else console.log('Multiple players in multiple teams; not implemented (yet?).');
+			if (init)
+				animationChangePlayerData(playerContainers[i], currentTeamsData[i].members[index], false, true, currentTeamsData[i].showTeamIcon);
+			else
+				animationChangePlayerData(playerContainers[i], currentTeamsData[i].members[index], false);
 		}
-	}
-	
-	function configurePlayerContainer(index, data) {
-		console.log(JSON.stringify(data));
 		
-		// Sets a flag if available.
-		if (data.region) animationSetFlag($('.playerFlag', playerContainers[index]), data.region);
+		// Toggle to false if this was the first time running this function since a change.
+		if (init) init = false;
 		
-		changeToName(index, data);
+		rotationTimeout = setTimeout(showTwitchs, displayNameFor);
 	}
 	
-	function changeToTwitch(index, data) {
-		var formattedURL = data.twitch.uri.replace('https://www.', '');
-		animationChangePlayerIconToTwitch($('.playerLogo', playerContainers[index]));
-		animationSetField($('.playerText', playerContainers[index]), formattedURL);
-		setTimeout(function() {changeToName(index, data);}, displayTwitchFor);
+	// Change to showing Twitch names.
+	function showTwitchs() {
+		for (var i = 0; i < teamMemberIndex.length; i++) {
+			if (!playerContainers[i]) break; // Skip if there's no container for this team.
+			var index = teamMemberIndex[i]; // Who the current player is who should be shown in this team.
+			animationChangePlayerData(playerContainers[i], currentTeamsData[i].members[index], true);
+		}
+		
+		rotationTimeout = setTimeout(rotateTeamMembers, displayTwitchFor);
 	}
 	
-	function changeToName(index, data) {
-		animationChangePlayerIconToName($('.playerLogo', playerContainers[index]));
-		animationSetField($('.playerText', playerContainers[index]), data.names.international);
-		setTimeout(function() {changeToTwitch(index, data);}, displayNameFor);
+	// Change settings to go to the next team member, if applicable.
+	function rotateTeamMembers() {
+		for (var i = 0; i < teamMemberIndex.length; i++) {
+			teamMemberIndex[i]++;
+			
+			// If we've reached the end of the team member array, go back to the start.
+			if (teamMemberIndex[i] >= currentTeamsData[i].members.length) teamMemberIndex[i] = 0;
+		}
+		
+		showNames();
+	}
+	
+	// Easy access to create member data object used above.
+	function createMemberData(member) {
+		// Gets username from URL.
+		if (member.twitch && member.twitch.uri) {
+			var twitchUsername = member.twitch.uri.split('/');
+			twitchUsername = twitchUsername[twitchUsername.length-1];
+		}
+		
+		var memberData = {
+			name: member.names.international,
+			twitch: twitchUsername,
+			region: member.region
+		};
+		
+		return memberData;
 	}
 });

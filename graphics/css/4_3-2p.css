@@ -92,5 +92,5 @@
 }
 
 /* Margins might need playing around with and some eyeballing to get timer text closer and still centered. */
-#timerContainer #timer {font-size: 77px; margin: 15px;}
+#timerContainer #timer {font-size: 78px; margin: 15px;}
 #timerContainer #gameEstimate {font-size: 35px; margin: 15px;}

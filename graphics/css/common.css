@@ -86,12 +86,16 @@ body {
 /*.playerFlag {content: url('../images/flag.png');}*/ /* Flag image is changed dynamically to something else. */
 .playerCoOp {content: url('../images/team-icon.png');}
 
-/* Turns flag/co-op icon and finish time container off by default. */
+/* Turns logo/flag/co-op icon and finish time container off by default. */
+.playerContainer div, .playerContainer img {opacity: 0;} /* Using opacity for the fade in. */
 .playerFlag, .playerCoOp {display: none;}
 .finishTimeContainer {opacity: 0;} /* Using opacity so the image is loaded in while invisible. */
 
 /* Makes these images fill up all the space they can. */
 .playerLogo, .playerFlag, .playerCoOp {height: 100%; box-sizing: border-box;}
+
+/* Force timer text to always be on one line. */
+#timerContainer {white-space: nowrap;}
 
 /* Different colours for each state the timer can be in. */
 .timer_paused {color: yellow;}
@@ -106,6 +110,9 @@ body {
 	text-align: center;
 }
 #timer .char3, #timer .char6 {width: 0.3em;}
+
+/* Hide time/estimate by default. */
+#timerContainer #timer, #timerContainer #gameEstimate {opacity: 0;}
 
 /* Adds text to start and end of estimate. */
 #gameEstimate:before {content: 'EST: ';}

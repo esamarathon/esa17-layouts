@@ -9,6 +9,7 @@ $(function() {
 	var gameCategory = $('#gameCategory', runInfoContainer);
 	var gameConsole = $('#gameConsole', runInfoContainer);
 	var gameEstimate = $('#timerContainer #gameEstimate');
+	var timerText = $('#timerContainer #timer');
 	
 	var runDataActiveRunReplicant = nodecg.Replicant('runDataActiveRun', speedcontrolBundle);
 	runDataActiveRunReplicant.on('change', function(newValue, oldValue) {
@@ -22,5 +23,6 @@ $(function() {
 		animationSetField(gameCategory, runData.category);
 		animationSetField(gameConsole, runData.system);
 		animationSetField(gameEstimate, runData.estimate);
+		animationSetField(timerText); // Fade out/in the timer as well.
 	}
 });
