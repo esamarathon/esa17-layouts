@@ -1,5 +1,10 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat:600');
 
+@font-face {
+	font-family: 'Bebas Kai';
+	src: url('../../images/BebasKai-Regular.otf') format('opentype');
+}
+
 /* Some general settings used for everything and other minor changes to the body. */
 body {
 	font-family: 'Montserrat', sans-serif;
@@ -78,7 +83,10 @@ body {
 .twitchLogo {content: url('../../images/twitch-logo.png');}
 
 .playerText {
-	overflow: hidden; /* In case the player name is really long, stop it from ruining the box and just hide the end. */
+	/* In case the player name is really long, stop it from ruining the box and just hide the end. */
+	overflow: hidden;
+	white-space: nowrap;
+	
 	flex: auto;
 	text-align: left; /* Overriding some default centering I have for most other stuff. */
 }

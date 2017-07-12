@@ -25,6 +25,11 @@
     ],
     "graphics": [
       {
+        "file": "run-paused.html",
+        "width": 1920,
+        "height": 1080
+      },
+	  {
         "file": "4_3-1p.html",
         "width": 1920,
         "height": 1080

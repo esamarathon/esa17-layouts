@@ -10,6 +10,7 @@ $(function() {
 	
 	// JQuery selectors.
 	var playerContainers = $('.playerContainer'); // Array
+	var playerContainerRunPaused = $('#playerContainerAll'); // Used on "Run Paused" layout.
 	
 	// Declaring other variables.
 	var displayNameFor = 45000;
@@ -54,18 +55,22 @@ $(function() {
 		// Set up team member indices so we can keep track on what team member is being shown.
 		for (var i = 0; i < currentTeamsData.length; i++) {teamMemberIndex[i] = 0;}
 		
-		showNames();
-	}
-	
-	// Change to showing usernames.
-	function showNames() {
-		// If this is the first run, clean out player containers not needed.
-		if (init && currentTeamsData.length < playerContainers.length) {
+		// Clean out player containers not needed.
+		if (currentTeamsData.length < playerContainers.length) {
 			for (var i = currentTeamsData.length; i < playerContainers.length; i++) {
 				animationCleanPlayerData(playerContainers[i]);
 			}
 		}
 		
+		// For normal game layouts.
+		if (playerContainerRunPaused.length === 0) showNames();
+		
+		// Do something slightly different on the "Run Paused" layout.
+		else showAllNames();
+	}
+	
+	// Change to showing usernames.
+	function showNames() {
 		for (var i = 0; i < teamMemberIndex.length; i++) {
 			if (!playerContainers[i]) break; // Skip if there's no container for this team.
 			var index = teamMemberIndex[i]; // Who the current player is who should be shown in this team.
@@ -103,6 +108,24 @@ $(function() {
 		}
 		
 		showNames();
+	}
+	
+	// The "Run Paused" layout only shows names in a custom way.
+	function showAllNames() {
+		// Dirty hack to show co-op icon if the first team is configured to show it.
+		var showTeamIcon = currentTeamsData[0] && currentTeamsData[0].showTeamIcon || false;
+		
+		// Goes through each team and members and makes a string to show the names correctly together.
+		var namesArray = [];
+		var namesList = 'No Runner(s)';
+		currentTeamsData.forEach(function(team) {
+			var teamMemberArray = [];
+			team.members.forEach(function(member) {teamMemberArray.push(member.name);});
+			namesArray.push(teamMemberArray.join(', '));
+		});
+		namesList = namesArray.join(' vs. ');
+		
+		animationChangePlayerData(playerContainerRunPaused, {name: namesList}, false, true, showTeamIcon);
 	}
 	
 	// Easy access to create member data object used above.

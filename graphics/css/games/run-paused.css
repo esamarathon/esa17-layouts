@@ -1,0 +1,63 @@
+/* Logos/sponsors */
+#sponsorImageAreaNormal {
+	left: 1387px;
+	top: 778px;
+	width: 523px;
+	height: 222px;
+}
+
+/* Giant text at the top of this layout. */
+#headerText {
+	position: fixed;
+	font-size: 121px;
+	font-family: Bebas Kai;
+	left: 0px;
+	top: 105px;
+	width: 1920px;
+	height: 100px;
+}
+
+/* Webcam(s) */
+.webcam {
+	width: 960px;
+	height: 540px;
+	top: 223px;
+}
+#webcam1 {left: 0px;}
+#webcam1 {left: 965px;}
+
+/* Player information stuff */
+#playerContainerAll {
+	left: 0px;
+	top: 768px;
+	width: 960px;
+	height: 54px;
+	padding: 5px;
+}
+
+.playerLogo {padding-right: 15px;} /* Space between player logo on left and player name text. */
+.playerText {font-size: 24px;}
+.playerCoOp {padding-left: 5px;}
+
+/* Run information stuff */
+#runInfoContainer {
+	left: 0px;
+	top: 827px;
+	width: 960px;
+	height: 168px;
+}
+
+#runInfoContainer #gameTitle {font-size: 33px;}
+#runInfoContainer #gameCategory, #runInfoContainer #gameConsole {font-size: 28px;}
+
+/* Timer stuff*/
+#timerContainer {
+	left: 965px;
+	top: 768px;
+	width: 407px;
+	height: 227px;
+}
+
+/* Margins might need playing around with and some eyeballing to get timer text closer and still centered. */
+#timerContainer #timer {font-size: 85px; margin: -15px;}
+#timerContainer #gameEstimate {font-size: 45px; margin: -5px;}
