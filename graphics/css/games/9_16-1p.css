@@ -1,6 +1,6 @@
 /* Different ESA logo than used on most of the other layouts. */
 #esaLogoCustom {
-	background-image: url('../images/esa-logo-9_16-1p.png');
+	background-image: url('../../images/esa-logo-9_16-1p.png');
 	left: 1264px;
 	top: 723px;
 	width: 640px;
