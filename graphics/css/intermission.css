@@ -1,0 +1,87 @@
+/* Logos/sponsors */
+#sponsorImageAreaNormal {
+	left: 154px;
+	top: 740px;
+	width: 523px;
+	height: 222px;
+}
+
+.headerTextBox {
+	outline: 0;
+	background-color: #662d91;
+	font-family: Bebas Kai;
+	font-size: 42px;
+}
+
+/* Webcam(s) */
+#webcamHeaderText {
+	left: 0px;
+	top: 104px;
+	width: 835px;
+	height: 49px;
+}
+
+#webcam1 {
+	left: 0px;
+	top: 153px;
+	width: 830px;
+	height: 465px;
+}
+
+/* Music ticker stuff. */
+#musicTicker {
+	left: 0px;
+	top: 623px;
+	width: 830px;
+	height: 59px;
+}
+
+.mcat {
+	content: url('../images/mcat.png');
+	padding-right: 10px;
+}
+
+.musicTickerText {
+	font-size: 25px;
+}
+
+/* Coming up runs stuff. */
+#comingUpRunsHeaderText {
+	left: 830px;
+	top: 104px;
+	width: 1090px;
+	height: 49px;
+}
+
+/* The box that the "coming up runs" boxes go into. */
+#comingUpRunsBox {
+	position: fixed;
+	left: 830px;
+	top: 153px;
+	width: 1095px;
+	height: 849px;
+}
+
+/* The container each "coming up run" is in. */
+.comingUpRunContainer {
+	position: relative;
+	width: 1095px;
+	height: 211px;
+	
+	/* Exchanges the normal outline for a border, but not on the top. */
+	outline: 0;
+	border: 5px solid #662d91;
+	border-top: 0;
+}
+
+/* Text and stuff settings inside of the container above. */
+/* Text and stuff settings inside of the container above. */
+.comingUpRunContainer #gameWhen {
+	font-size: 35px;
+	font-family: Bebas Kai;
+	color: #ffbd0e;
+}
+.comingUpRunContainer #gameTitle {font-size: 34px;}
+.comingUpRunContainer #gameCategory, .comingUpRunContainer #gamePlayers {font-size: 28px;}
+.playerCoOp {display: inline;} /* Override the default setting for not showing this. */
+.comingUpRunContainer #gamePlayers img {height: 0.8em;} /* Images next to player name(s) are the same height. */

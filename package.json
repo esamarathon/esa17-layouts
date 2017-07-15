@@ -25,6 +25,11 @@
     ],
     "graphics": [
       {
+        "file": "intermission.html",
+        "width": 1920,
+        "height": 1080
+      },
+      {
         "file": "run-paused.html",
         "width": 1920,
         "height": 1080

@@ -1,8 +1,8 @@
+/* Custom Fonts */
 @import url('https://fonts.googleapis.com/css?family=Montserrat:600');
-
 @font-face {
 	font-family: 'Bebas Kai';
-	src: url('../../images/BebasKai-Regular.otf') format('opentype');
+	src: url('../images/BebasKai-Regular.otf') format('opentype');
 }
 
 /* Some general settings used for everything and other minor changes to the body. */
@@ -19,7 +19,7 @@ body {
 	position: fixed;
 	left: 0px;
 	top: 0px;
-	background-image: url('../../images/background-1.png');
+	background-image: url('../images/background-1.png');
 	background-repeat: no-repeat;
 	background-size: cover;
 	width: 1920px;
@@ -53,7 +53,7 @@ body {
 
 /* Small "same colour as borders" box that appears in the game feeds when players finish in a race. */
 .finishTimeContainer {background-color: #662d91;}
-.finishTimeContainer img {content: url('../../images/finish-flag.gif'); height: 100%; image-rendering: pixelated;}
+.finishTimeContainer img {content: url('../images/finish-flag.gif'); height: 100%; image-rendering: pixelated;}
 
 /* General setings for displaying our logo. */
 .esaLogo {
@@ -64,7 +64,7 @@ body {
 
 /* This logo image is used on a lot of layouts in the same space, so everything is defined here. */
 #esaLogoLong {
-	background-image: url('../../images/esa-logo-long.png');
+	background-image: url('../images/esa-logo-long.png');
 	left: 12px;
 	top: 5px;
 	width: 1527px;
@@ -79,10 +79,10 @@ body {
 
 /* Image classes for logo on the left of player name. */
 /* Right now, these images must both be the same size to not mess up animations or look stupid. */
-.nameLogo {content: url('../../images/player-logo.png');}
-.twitchLogo {content: url('../../images/twitch-logo.png');}
+.nameLogo {content: url('../images/player-logo.png');}
+.twitchLogo {content: url('../images/twitch-logo.png');}
 
-.playerText {
+.playerText, .musicTickerText {
 	/* In case the player name is really long, stop it from ruining the box and just hide the end. */
 	overflow: hidden;
 	white-space: nowrap;
@@ -91,8 +91,8 @@ body {
 	text-align: left; /* Overriding some default centering I have for most other stuff. */
 }
 
-/*.playerFlag {content: url('../../images/flag.png');}*/ /* Flag image is changed dynamically to something else. */
-.playerCoOp {content: url('../../images/team-icon.png');}
+/*.playerFlag {content: url('../images/flag.png');}*/ /* Flag image is changed dynamically to something else. */
+.playerCoOp {content: url('../images/team-icon.png');}
 
 /* Turns logo/flag/co-op icon and finish time container off by default. */
 .playerContainer div, .playerContainer img {opacity: 0;} /* Using opacity for the fade in. */
@@ -100,7 +100,7 @@ body {
 .finishTimeContainer {opacity: 0;} /* Using opacity so the image is loaded in while invisible. */
 
 /* Makes these images fill up all the space they can. */
-.playerLogo, .playerFlag, .playerCoOp {height: 100%; box-sizing: border-box;}
+.playerLogo, .playerFlag, .playerCoOp, .mcat {height: 100%; box-sizing: border-box;}
 
 /* Force timer text to always be on one line. */
 #timerContainer {white-space: nowrap;}
