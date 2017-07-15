@@ -9,6 +9,8 @@
 	
 	<!-- JavaScript -->
 	<script src="components/jquery/dist/jquery.min.js"></script>
+	<script src="components/moment/min/moment.min.js"></script>
+	<script src="components/jquery.marquee/jquery.marquee.min.js" type="text/javascript"></script>
 	<script src="js/intermission.js"></script>
 </head>
 <body>
@@ -19,9 +21,7 @@
 	<div class="sponsorImageArea" id="sponsorImageAreaTopPremium"></div>
 	
 	<!-- Webcam(s) -->
-	<div id="webcamHeaderText" class="storageBox flexContainer headerTextBox">
-		Check out our 2nd stream! twitch.tv/geekygoonsquad
-	</div>
+	<div id="webcamHeaderText" class="storageBox flexContainer headerTextBox"></div>
 	<div id="webcam1" class="storageBox webcam">
 		<div id="twitchEmbed"></div>
 	</div>
@@ -29,63 +29,14 @@
 	<!-- Music Ticker -->
 	<div id="musicTicker" class="storageBox flexContainer">
 		<img class="mcat">
-		<div class="musicTickerText">This is the text of some music title!</div>
+		<div class="musicTickerText"></div>
 	</div>
 	
 	<!-- Coming Up Runs Stuff -->
 	<div id="comingUpRunsHeaderText" class="storageBox flexContainer headerTextBox">
 		Runs coming up soon
 	</div>
-	<div id="comingUpRunsBox">
-		<div class="comingUpRunContainer storageBox flexContainer">
-			<div><!-- An extra div is needed to make sure all of these are on individual lines. -->
-				<div id="gameWhen">Next</div>
-				<div id="gameTitle">Prince of Persia: The Forgotten Sands</div>
-				<div id="gameCategory">Any%</div>
-				<div id="gamePlayers">
-					<img class="playerLogo nameLogo">
-					<span>FingersTehHand</span>
-					<img class="playerCoOp">
-				</div>
-			</div>
-		</div>
-		<div class="comingUpRunContainer storageBox flexContainer">
-			<div><!-- An extra div is needed to make sure all of these are on individual lines. -->
-				<div id="gameWhen">Next</div>
-				<div id="gameTitle">Prince of Persia: The Forgotten Sands</div>
-				<div id="gameCategory">Any%</div>
-				<div id="gamePlayers">
-					<img class="playerLogo nameLogo">
-					<span>FingersTehHand</span>
-					<img class="playerCoOp">
-				</div>
-			</div>
-		</div>
-		<div class="comingUpRunContainer storageBox flexContainer">
-			<div><!-- An extra div is needed to make sure all of these are on individual lines. -->
-				<div id="gameWhen">Next</div>
-				<div id="gameTitle">Prince of Persia: The Forgotten Sands</div>
-				<div id="gameCategory">Any%</div>
-				<div id="gamePlayers">
-					<img class="playerLogo nameLogo">
-					<span>FingersTehHand</span>
-					<img class="playerCoOp">
-				</div>
-			</div>
-		</div>
-		<div class="comingUpRunContainer storageBox flexContainer">
-			<div><!-- An extra div is needed to make sure all of these are on individual lines. -->
-				<div id="gameWhen">Next</div>
-				<div id="gameTitle">Prince of Persia: The Forgotten Sands</div>
-				<div id="gameCategory">Any%</div>
-				<div id="gamePlayers">
-					<img class="playerLogo nameLogo">
-					<span>FingersTehHand</span>
-					<img class="playerCoOp">
-				</div>
-			</div>
-		</div>
-	</div>
+	<div id="comingUpRunsBox"></div>
 </div>
 </body>
 </html>

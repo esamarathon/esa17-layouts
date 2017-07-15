@@ -2,6 +2,8 @@
   "name": "esa17-layouts",
   "dependencies": {
     "jquery": "^3.2.1",
-    "letteringjs": "^0.7.0"
+    "letteringjs": "^0.7.0",
+    "moment": "^2.18.1",
+    "jquery.marquee": "jQuery.Marquee#^1.4.1"
   }
 }
