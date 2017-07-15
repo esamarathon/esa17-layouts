@@ -4,80 +4,31 @@
 }
 
 /* Logos/sponsors */
-#sponsorImageAreaNormal {
-	left: 1683px;
-	top: 477px;
+.sponsorImageAreaNormal {
+	top: 739px;
 	width: 222px;
-	height: 523px;
+	height: 261px;
 }
+#sponsorImageAreaNormal1 {left: 10px;}
+#sponsorImageAreaNormal2 {left: 1683px;}
 
 /* A really big flex box wrapper that the information on screen goes in. */
 #intermissionDataWrapper {
 	position: fixed;
 	display: flex;
-	left: 0px;
-	top: 116px;
-	width: 1683px;
-	height: 884px;
+	left: 242px;
+	top: 114px;
+	width: 1431px;
+	height: 886px;
 	align-items: flex-end; /* Aligns vertically. */
 	justify-content: center; /* Aligns horizontally. */
 }
 
-.headerTextBox {
-	background-color: #662d91;
-	font-family: Bebas Kai;
-	font-size: 39px;
-	height: 42px;
-}
-
-/* A big tall box on the left side of the screen. */
-#comingUpRunsBoxWrapper {
-	width: 576px;
-}
-
-/* Storage for game names. */
-#comingUpRunsBox {
-	padding: 15px;
-	background-color: rgba(0,0,0,0.68);
-	border-right: 5px solid #662d91;
-	text-align: center;
-}
-
-/* The lines separating game names. */
-#comingUpRunsBox hr {
-	border: 0;
-	width: 175px;
-	height: 5px;
-	color: white;
-	background-color: white;
-}
-
-#comingUpRunsBox span {font-size: 25px;} /* Game Names */
-
-/* Music ticker stuff. */
-#musicTicker {
-	height: 50px;
-	position: static;
-	outline: 0;
-	border: 5px solid #662d91;
-	border-left: 0;
-}
-.mcat {padding-right: 10px;}
-.musicTickerText {font-size: 22px;}
-
 /* Hosts stuff here. */
 #hostsWrapper {
-	flex: auto;
 	display: flex;
 	justify-content: center; /* Aligns horizontally. */
-	margin-left: 10px;
-	margin-right: 10px;
-}
-
-#hostsStorage {
-	display: flex;
-	justify-content: center; /* Aligns horizontally. */
-	border-left: 5px solid #662d91;
+	margin-bottom: 10px;
 }
 
 /* Hijacking the player container for hosts. */
@@ -85,7 +36,6 @@
 	position: static;
 	outline: 0;
 	border: 5px solid #662d91;
-	border-top: 0;
 	border-left: 0;
 	height: 54px;
 	padding: 3px;
@@ -93,4 +43,40 @@
 }
 .playerContainer div, .playerContainer img {opacity: 1;} /* Overriding defaults. */
 .playerFlag {content: url('../images/flag.png'); padding-left: 10px; display: inline;}
-.playerText {font-size: 23px;}
+.playerText {font-size: 25px;}
+
+/* A little bit dirty but without adding extra wrappers, the best I've got for now. */
+#playerContainer1 {border-left: 5px solid #662d91;}
+
+/* The box below the host names, changes what it stores via JavaScript. */
+#extraDataBoxWrapper {
+	display: flex;
+	justify-content: center; /* Aligns horizontally. */
+}
+
+#comingUpHeaderTextBox {
+	background-color: #662d91;
+	font-family: Bebas Kai;
+	font-size: 39px;
+	padding: 0 5px 0 10px;;
+}
+
+/* Storage for game names. */
+#comingUpRunsBox {
+	border: 5px solid #662d91;
+	padding: 7px;
+	background-color: rgba(0,0,0,0.68);
+	text-align: center;
+	font-size: 25px;
+}
+
+/* Music ticker stuff. */
+/*#musicTicker {
+	height: 50px;
+	position: static;
+	outline: 0;
+	border: 5px solid #662d91;
+	border-left: 0;
+}
+.mcat {padding-right: 10px;}
+.musicTickerText {font-size: 22px;}*/

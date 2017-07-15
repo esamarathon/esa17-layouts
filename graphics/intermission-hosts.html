@@ -14,50 +14,26 @@
 <div id="windowContainer">
 	<!-- Logos/Sponsors -->
 	<div id="esaLogoLong" class="esaLogo"></div>
-	<div class="sponsorImageArea" id="sponsorImageAreaNormal"></div>
+	<div class="sponsorImageArea sponsorImageAreaNormal" id="sponsorImageAreaNormal1"></div>
+	<div class="sponsorImageArea sponsorImageAreaNormal" id="sponsorImageAreaNormal2"></div>
 	<div class="sponsorImageArea" id="sponsorImageAreaTopPremium"></div>
 	
 	<div id="intermissionDataWrapper">
-		<div id="comingUpRunsBoxWrapper">
-			<div class="headerTextBox flexContainer">
-				Runs coming up soon
-			</div>
-			<div id="comingUpRunsBox">
-				<div>
-					<span>Some Game Name</span>
-					<hr>
-					<span>Some Game Name</span>
-					<hr>
-					<span>Some Game Name</span>
+		<div><!-- An extra div is needed to make sure both elements are on individual lines. -->
+			<div id="hostsWrapper">
+				<div id="playerContainer1" class="playerContainer storageBox flexContainer">
+					<div class="playerText">ALovelyName</div>
+					<img class="playerFlag"><!-- Pac loves these things dude. -->
+				</div>
+				<div class="playerContainer storageBox flexContainer">
+					<div class="playerText">ALovelyName</div>
+					<img class="playerFlag"><!-- Pac loves these things dude. -->
 				</div>
 			</div>
-			
-			<!-- Music Ticker (yes it's stored in the "coming up" wrapper, I know!) -->
-			<div id="musicTicker" class="storageBox flexContainer">
-				<img class="mcat">
-				<div class="musicTickerText">This is the text of some music title!</div>
-			</div>
-		</div>
 		
-		<div id="hostsWrapper">
-			<div>
-				<div class="headerTextBox flexContainer">
-					Hosts
-				</div>
-				<div id="hostsStorage">
-					<div class="playerContainer storageBox flexContainer">
-						<div class="playerText">ALovelyName</div>
-						<img class="playerFlag"><!-- Pac loves these things dude. -->
-					</div>
-					<div class="playerContainer storageBox flexContainer">
-						<div class="playerText">ALovelyName</div>
-						<img class="playerFlag"><!-- Pac loves these things dude. -->
-					</div>
-					<div class="playerContainer storageBox flexContainer">
-						<div class="playerText">ALovelyName</div>
-						<img class="playerFlag"><!-- Pac loves these things dude. -->
-					</div>
-				</div>
+			<div id="extraDataBoxWrapper">
+				<div id="comingUpHeaderTextBox" class="flexContainer">Coming Up</div>
+				<div id="comingUpRunsBox" class="flexContainer">Some Nice Game | Some Nice Game | Some Nice Game</div>
 			</div>
 		</div>
 	</div>
