@@ -35,15 +35,8 @@
 	width: 830px;
 	height: 59px;
 }
-
-.mcat {
-	content: url('../images/mcat.png');
-	padding-right: 10px;
-}
-
-.musicTickerText {
-	font-size: 25px;
-}
+.mcat {padding-right: 10px;}
+.musicTickerText {font-size: 25px;}
 
 /* Coming up runs stuff. */
 #comingUpRunsHeaderText {
@@ -74,7 +67,6 @@
 	border-top: 0;
 }
 
-/* Text and stuff settings inside of the container above. */
 /* Text and stuff settings inside of the container above. */
 .comingUpRunContainer #gameWhen {
 	font-size: 35px;

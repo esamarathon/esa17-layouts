@@ -1,0 +1,96 @@
+/* This layout doesn't need the background image. */
+#windowContainer {
+	background-image: none;
+}
+
+/* Logos/sponsors */
+#sponsorImageAreaNormal {
+	left: 1683px;
+	top: 477px;
+	width: 222px;
+	height: 523px;
+}
+
+/* A really big flex box wrapper that the information on screen goes in. */
+#intermissionDataWrapper {
+	position: fixed;
+	display: flex;
+	left: 0px;
+	top: 116px;
+	width: 1683px;
+	height: 884px;
+	align-items: flex-end; /* Aligns vertically. */
+	justify-content: center; /* Aligns horizontally. */
+}
+
+.headerTextBox {
+	background-color: #662d91;
+	font-family: Bebas Kai;
+	font-size: 39px;
+	height: 42px;
+}
+
+/* A big tall box on the left side of the screen. */
+#comingUpRunsBoxWrapper {
+	width: 576px;
+}
+
+/* Storage for game names. */
+#comingUpRunsBox {
+	padding: 15px;
+	background-color: rgba(0,0,0,0.68);
+	border-right: 5px solid #662d91;
+	text-align: center;
+}
+
+/* The lines separating game names. */
+#comingUpRunsBox hr {
+	border: 0;
+	width: 175px;
+	height: 5px;
+	color: white;
+	background-color: white;
+}
+
+#comingUpRunsBox span {font-size: 25px;} /* Game Names */
+
+/* Music ticker stuff. */
+#musicTicker {
+	height: 50px;
+	position: static;
+	outline: 0;
+	border: 5px solid #662d91;
+	border-left: 0;
+}
+.mcat {padding-right: 10px;}
+.musicTickerText {font-size: 22px;}
+
+/* Hosts stuff here. */
+#hostsWrapper {
+	flex: auto;
+	display: flex;
+	justify-content: center; /* Aligns horizontally. */
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+#hostsStorage {
+	display: flex;
+	justify-content: center; /* Aligns horizontally. */
+	border-left: 5px solid #662d91;
+}
+
+/* Hijacking the player container for hosts. */
+.playerContainer {
+	position: static;
+	outline: 0;
+	border: 5px solid #662d91;
+	border-top: 0;
+	border-left: 0;
+	height: 54px;
+	padding: 3px;
+	padding-left: 10px;
+}
+.playerContainer div, .playerContainer img {opacity: 1;} /* Overriding defaults. */
+.playerFlag {content: url('../images/flag.png'); padding-left: 10px; display: inline;}
+.playerText {font-size: 23px;}

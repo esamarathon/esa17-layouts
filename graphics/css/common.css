@@ -93,6 +93,7 @@ body {
 
 /*.playerFlag {content: url('../images/flag.png');}*/ /* Flag image is changed dynamically to something else. */
 .playerCoOp {content: url('../images/team-icon.png');}
+.mcat {content: url('../images/mcat.png');}
 
 /* Turns logo/flag/co-op icon and finish time container off by default. */
 .playerContainer div, .playerContainer img {opacity: 0;} /* Using opacity for the fade in. */
