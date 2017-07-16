@@ -4,7 +4,7 @@ $(function() {
 	var speedcontrolBundle = 'nodecg-speedcontrol';
 	
 	// JQuery selectors.
-	var webcam1Area = $('#webcam1');
+	var webcamArea = $('#webcam1');
 	var twitchEmbed = $('#twitchEmbed');
 	var comingUpRunsBox = $('#comingUpRunsBox');
 	var musicTickerText = $('.musicTickerText');
@@ -16,7 +16,7 @@ $(function() {
 	
 	// Twitch's own JavaScript implementation of their player sucks and I don't wanna rely on it,
 	// so need to do some of my own API calls to know when to add/remove this.
-	//twitchEmbed.html('<iframe src="https://player.twitch.tv/?muted&channel=geekygoonsquad" frameborder="0" scrolling="no" height="'+webcam1Area.css('height')+'" width="'+webcam1Area.css('width')+'"></iframe>');
+	//twitchEmbed.html('<iframe src="https://player.twitch.tv/?muted&channel=geekygoonsquad" frameborder="0" scrolling="no" height="'+webcamArea.css('height')+'" width="'+webcamArea.css('width')+'"></iframe>');
 	//setTimeout(function() {twitchEmbed.html('');}, 10000);
 	
 	// This will change depending on if the stream is being displayed or not.
@@ -24,7 +24,7 @@ $(function() {
 	webcamHeaderText.html(webcamHeader);
 	
 	// Will add the actual song name once the player is designed.
-	var songName = 'This is the text of some music title! This is the text of some music title!';
+	var songName = 'Yours Truly (feat. Danyka Nadeau) (Aaron Jackson Remix) - Mr FijiWiji';
 	musicTickerText.html(songName);
 	
 	// Hide the song name and make it so we can find out the whole width of the string.
@@ -66,22 +66,6 @@ $(function() {
 			}
 		}
 	});
-	
-	function findIndexInRunDataArray(run, runDataArray) {
-		var indexOfRun = -1;
-		
-		// Completely skips this if the run variable isn't defined.
-		if (run) {
-			for (var i = 0; i < runDataArray.length; i++) {
-				if (run.runID === runDataArray[i].runID) {
-					indexOfRun = i;
-					break;
-				}
-			}
-		}
-		
-		return indexOfRun;
-	}
 	
 	// Set information on the layout for upcoming runs.
 	function updateComingUpRuns(next4Runs) {
@@ -133,31 +117,5 @@ $(function() {
 		divWrapper.appendTo(container);
 		
 		return container;
-	}
-	
-	// Mostly copied from the player-info.js file, but CBA to make another file to store it in.
-	function formPlayerNamesString(runData) {
-		// Goes through each team and members and makes a string to show the names correctly together.
-		var namesArray = [];
-		var namesList = 'No Runner(s)';
-		runData.teams.forEach(function(team) {
-			var teamMemberArray = [];
-			team.members.forEach(function(member) {teamMemberArray.push(member.names.international);});
-			namesArray.push(teamMemberArray.join(', '));
-		});
-		namesList = namesArray.join(' vs. ');
-		
-		return namesList;
-	}
-	
-	// Copied from HoraroImportDashboard.js in the speedcontrol bundle.
-	function msToTime(duration) {
-		var minutes = parseInt((duration / 60) % 60);
-		var hours = parseInt(duration / (3600));
-		
-		hours = (hours < 10) ? '0' + hours : hours;
-		minutes = (minutes < 10) ? '0' + minutes : minutes;
-		
-		return hours + ':' + minutes;
 	}
 });

@@ -8,7 +8,10 @@
 	<link href="css/intermission-hosts.css" rel="stylesheet"/>
 	
 	<!-- JavaScript -->
-	<!-- none yet -->
+	<script src="components/jquery/dist/jquery.min.js"></script>
+	<script src="js/animation.js"></script>
+	<script src="js/intermission-utils.js"></script>
+	<script src="js/intermission-hosts.js"></script>
 </head>
 <body>
 <div id="windowContainer">
@@ -20,21 +23,10 @@
 	
 	<div id="intermissionDataWrapper">
 		<div><!-- An extra div is needed to make sure both elements are on individual lines. -->
-			<div id="hostsWrapper">
-				<div id="playerContainer1" class="playerContainer storageBox flexContainer">
-					<div class="playerText">ALovelyName</div>
-					<img class="playerFlag"><!-- Pac loves these things dude. -->
-				</div>
-				<div class="playerContainer storageBox flexContainer">
-					<div class="playerText">ALovelyName</div>
-					<img class="playerFlag"><!-- Pac loves these things dude. -->
-				</div>
-			</div>
-		
-			<div id="extraDataBoxWrapper">
-				<div id="comingUpHeaderTextBox" class="flexContainer">Coming Up</div>
-				<div id="comingUpRunsBox" class="flexContainer">Some Nice Game | Some Nice Game | Some Nice Game</div>
-			</div>
+			<div id="hostsWrapper"></div>
+			
+			<!-- Storage for extra messages we want to show on this layout. -->
+			<div id="extraDataBoxWrapper"></div>
 		</div>
 	</div>
 </div>
