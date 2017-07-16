@@ -1,0 +1,53 @@
+/* Custom Fonts */
+@import url('https://fonts.googleapis.com/css?family=Montserrat:600');
+@font-face {
+	font-family: 'Bebas Kai';
+	src: url('../images/BebasKai-Regular.otf') format('opentype');
+}
+
+/* Some general settings used for everything and other minor changes to the body. */
+body {
+	font-family: 'Montserrat', sans-serif;
+	color: white;
+	overflow: hidden;
+	margin: 0;
+	padding: 0;
+}
+
+#barWrapper {
+	width: 1920px;
+	display: flex;
+	height: 70px;
+}
+
+.flexContainer {
+	display: flex;
+	align-items: center; /* Aligns vertically. */
+	justify-content: center; /* Aligns horizontally. */
+}
+
+.storageBox {
+	background-color: rgba(0,0,0,0.68);
+	border-top: 5px solid #662d91;
+	box-sizing: border-box;
+}
+
+#donationArea {
+	flex: initial;
+	font-size: 30px;
+	padding: 10px;
+}
+
+#messageArea {
+	flex: auto;
+	border-left: 5px solid #662d91;
+	border-right: 5px solid #662d91;
+	justify-content: flex-start; /* Aligns horizontally. */
+	padding: 15px;
+	font-size: 25px;
+}
+
+#clockArea {
+	font-size: 35px;
+	width: 130px;
+}
