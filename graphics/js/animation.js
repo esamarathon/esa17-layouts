@@ -8,6 +8,26 @@ function animationSetField(selector, newHTML) {
 	});
 }
 
+function animationFadeBetweenElements(selector1, selector2) {
+	$(selector1).animate({'opacity': '0'}, 500, 'linear');
+	$(selector2).animate({'opacity': '1'}, 500, 'linear');
+}
+
+// Animation lasts under 1 tick (5s) so no extra callbacks are needed.
+function animationUpdateDonationTotal(selector, oldValue, newValue) {
+	$(selector)
+	.prop('number', oldValue*100)
+	.animateNumber({
+		number: newValue*100,
+		numberStep: function(now, tween) {
+			var flooredNumber = Math.floor(now)/100;
+			var target = $(tween.elem);
+			flooredNumber = flooredNumber.toFixed(2);
+			target.html('$'+flooredNumber);
+		}
+	}, 4000, 'linear');
+}
+
 // Used to clean player containers that are not needed.
 // (This doesn't actually clear them, just hides the elements for now).
 function animationCleanPlayerData(selector) {

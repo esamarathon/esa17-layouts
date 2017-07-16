@@ -4,6 +4,7 @@
     "jquery": "^3.2.1",
     "letteringjs": "^0.7.0",
     "moment": "^2.18.1",
-    "jquery.marquee": "jQuery.Marquee#^1.4.1"
+    "jquery.marquee": "jQuery.Marquee#^1.4.1",
+    "jquery-animateNumber": "^0.0.14"
   }
 }
