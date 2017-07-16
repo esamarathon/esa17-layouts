@@ -17,20 +17,26 @@ $(function() {
 	runDataActiveRunReplicant.on('change', function(newValue, oldValue) {
 		if (!init) {
 			init = true;
-			
-			// Checks if the run data array is actually imported yet by checking if it's an array.
-			if ($.isArray(runDataArrayReplicant.value)) {
-				var indexOfCurrentRun = findIndexInRunDataArray(newValue, runDataArrayReplicant.value);
-				next3Runs = [];
-				for (var i = 1; i <= 3; i++) {
-					if (!runDataArrayReplicant.value[indexOfCurrentRun+i]) break;
-					next3Runs.push(runDataArrayReplicant.value[indexOfCurrentRun+i]);
-				}
-			}
-			
+			refreshComingUpRunsData();
 			showComingUpGame();
 		}
 	});
+	
+	nodecg.listenFor('forceRefreshIntermission', speedcontrolBundle, function() {
+		refreshComingUpRunsData();
+	});
+	
+	function refreshComingUpRunsData() {
+		// Checks if the run data array is actually imported yet by checking if it's an array.
+		if ($.isArray(runDataArrayReplicant.value)) {
+			var indexOfCurrentRun = findIndexInRunDataArray(newValue, runDataArrayReplicant.value);
+			next3Runs = [];
+			for (var i = 1; i <= 3; i++) {
+				if (!runDataArrayReplicant.value[indexOfCurrentRun+i]) break;
+				next3Runs.push(runDataArrayReplicant.value[indexOfCurrentRun+i]);
+			}
+		}
+	}
 	
 	function showComingUpGame() {
 		var runData = next3Runs[comingUpGameIndex];

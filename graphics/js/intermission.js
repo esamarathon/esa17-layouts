@@ -16,7 +16,7 @@ $(function() {
 	
 	// Twitch's own JavaScript implementation of their player sucks and I don't wanna rely on it,
 	// so need to do some of my own API calls to know when to add/remove this.
-	//twitchEmbed.html('<iframe src="https://player.twitch.tv/?muted&channel=geekygoonsquad" frameborder="0" scrolling="no" height="'+webcamArea.css('height')+'" width="'+webcamArea.css('width')+'"></iframe>');
+	//twitchEmbed.html('<iframe src="https://player.twitch.tv/?muted&channel=geekygoonsquad" frameborder="0" scrolling="no" height="'+webcamArea.height()+'" width="'+webcamArea.width()+'"></iframe>');
 	//setTimeout(function() {twitchEmbed.html('');}, 10000);
 	
 	// This will change depending on if the stream is being displayed or not.
@@ -52,20 +52,27 @@ $(function() {
 	runDataActiveRunReplicant.on('change', function(newValue, oldValue) {
 		if (!init) {
 			init = true;
-			
-			// Checks if the run data array is actually imported yet by checking if it's an array.
-			if ($.isArray(runDataArrayReplicant.value)) {
-				var indexOfCurrentRun = findIndexInRunDataArray(newValue, runDataArrayReplicant.value);
-				var next4Runs = [];
-				for (var i = 1; i <= 4; i++) {
-					if (!runDataArrayReplicant.value[indexOfCurrentRun+i]) break;
-					next4Runs.push(runDataArrayReplicant.value[indexOfCurrentRun+i]);
-				}
-				
-				updateComingUpRuns(next4Runs);
-			}
+			refreshComingUpRunsData();
 		}
 	});
+	
+	nodecg.listenFor('forceRefreshIntermission', speedcontrolBundle, function() {
+		refreshComingUpRunsData();
+	});
+	
+	function refreshComingUpRunsData() {
+		// Checks if the run data array is actually imported yet by checking if it's an array.
+		if ($.isArray(runDataArrayReplicant.value)) {
+			var indexOfCurrentRun = findIndexInRunDataArray(newValue, runDataArrayReplicant.value);
+			var next4Runs = [];
+			for (var i = 1; i <= 4; i++) {
+				if (!runDataArrayReplicant.value[indexOfCurrentRun+i]) break;
+				next4Runs.push(runDataArrayReplicant.value[indexOfCurrentRun+i]);
+			}
+			
+			updateComingUpRuns(next4Runs);
+		}
+	}
 	
 	// Set information on the layout for upcoming runs.
 	function updateComingUpRuns(next4Runs) {
