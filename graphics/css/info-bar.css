@@ -14,6 +14,7 @@ body {
 	padding: 0;
 }
 
+/* The whole bar's settings and size. */
 #barWrapper {
 	width: 1920px;
 	display: flex;
@@ -32,12 +33,26 @@ body {
 	box-sizing: border-box;
 }
 
+/* Area that stores the donation total and STC logo stuff. */
 #donationArea {
 	flex: initial;
 	font-size: 30px;
 	padding: 10px;
 }
 
+#donationTotalWrapper {width: 185px;}
+#stcLogo {padding-right: 10px;}
+
+/* Puts the image behind the donation total */
+#stcText {
+	position: absolute;
+	opacity: 0;
+	width: inherit;
+}
+
+#donationTotal {opacity: 1;}
+
+/* Area that stores all the messages the bar needs to show. */
 #messageArea {
 	flex: auto;
 	border-left: 5px solid #662d91;
@@ -47,6 +62,7 @@ body {
 	font-size: 25px;
 }
 
+/* Area for the clock. */
 #clockArea {
 	font-size: 35px;
 	width: 130px;

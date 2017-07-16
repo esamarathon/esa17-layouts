@@ -19,9 +19,9 @@ body {
 	position: fixed;
 	left: 0px;
 	top: 0px;
-	background-image: url('../images/background-1.png');
+	/*background-image: url('../images/background-1.png');
 	background-repeat: no-repeat;
-	background-size: cover;
+	background-size: cover;*/
 	width: 1920px;
 	height: 1080px;
 	overflow: hidden;
@@ -49,7 +49,8 @@ body {
 }
 
 /* Used in combination with above to give it a green background instead for games/cams. */
-.gameCapture, .webcam {background-color: #00DD00;}
+/*.gameCapture, .webcam {background-color: #00DD00;}*/
+.gameCapture, .webcam {background-color: rgba(0,0,0,0);}
 
 /* Small "same colour as borders" box that appears in the game feeds when players finish in a race. */
 .finishTimeContainer {background-color: #662d91;}
