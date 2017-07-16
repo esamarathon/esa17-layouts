@@ -10,6 +10,7 @@ $(function() {
 	// Declaring other variables.
 	var init = false;
 	var next3Runs = [];
+	var next3RunsTempCopy = [];
 	var comingUpGameIndex = 0;
 	
 	var runDataArrayReplicant = nodecg.Replicant('runDataArray', speedcontrolBundle);
@@ -29,7 +30,7 @@ $(function() {
 	function refreshComingUpRunsData() {
 		// Checks if the run data array is actually imported yet by checking if it's an array.
 		if ($.isArray(runDataArrayReplicant.value)) {
-			var indexOfCurrentRun = findIndexInRunDataArray(newValue, runDataArrayReplicant.value);
+			var indexOfCurrentRun = findIndexInRunDataArray(runDataActiveRunReplicant.value, runDataArrayReplicant.value);
 			next3Runs = [];
 			for (var i = 1; i <= 3; i++) {
 				if (!runDataArrayReplicant.value[indexOfCurrentRun+i]) break;
@@ -39,7 +40,10 @@ $(function() {
 	}
 	
 	function showComingUpGame() {
-		var runData = next3Runs[comingUpGameIndex];
+		// Temp copy made so it doesn't break when you force refresh intermission.
+		if (comingUpGameIndex === 0) next3RunsTempCopy = next3Runs.slice(0);
+		
+		var runData = next3RunsTempCopy[comingUpGameIndex];
 		
 		if (!runData) showMusicTicker(); // Move straight to music ticker if no games to show.
 		else {
@@ -51,7 +55,7 @@ $(function() {
 			comingUpGameIndex++;
 			
 			// If there's no more games to show, move to the music ticker.
-			if (comingUpGameIndex >= next3Runs.length) {
+			if (comingUpGameIndex >= next3RunsTempCopy.length) {
 				comingUpGameIndex = 0;
 				setTimeout(showMusicTicker, 10000);
 			}

@@ -63,7 +63,7 @@ $(function() {
 	function refreshComingUpRunsData() {
 		// Checks if the run data array is actually imported yet by checking if it's an array.
 		if ($.isArray(runDataArrayReplicant.value)) {
-			var indexOfCurrentRun = findIndexInRunDataArray(newValue, runDataArrayReplicant.value);
+			var indexOfCurrentRun = findIndexInRunDataArray(runDataActiveRunReplicant.value, runDataArrayReplicant.value);
 			var next4Runs = [];
 			for (var i = 1; i <= 4; i++) {
 				if (!runDataArrayReplicant.value[indexOfCurrentRun+i]) break;
@@ -81,6 +81,8 @@ $(function() {
 		
 		// Fade out.
 		comingUpRunsBox.animate({'opacity': '0'}, 500, 'linear', function() {
+			comingUpRunsBox.html(''); // Clears out old boxes, if needed.
+			
 			// Create containers for all the runs.
 			for (var i = 0; i < next4Runs.length; i++) {
 				var container = createComingUpRunContainer(next4Runs[i], next4Runs[i-1]);
