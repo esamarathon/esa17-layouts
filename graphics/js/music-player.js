@@ -2,7 +2,7 @@
 $(function() {
 	var jsmediatags = window.jsmediatags;
 	var isOBS = (window.obsstudio) ? true : false;
-	var defaultVolume = 0.10;
+	var defaultVolume = 0.1;
 	var songs = [];
 	var init = false;
 	var skippingSong = false;
@@ -120,7 +120,7 @@ $(function() {
 					pausingSong = true;
 					songPlayingReplicant.value = true;
 					audioPlayer[0].play();
-					audioPlayer.animate({'volume': defaultVolume}, 1000, 'linear', function() {
+					audioPlayer.animate({'volume': defaultVolume}, 5000, 'linear', function() {
 						pausingSong = false;
 					});
 				}
@@ -128,7 +128,7 @@ $(function() {
 				function pauseMusic(callback) {
 					pausingSong = true;
 					songPlayingReplicant.value = false;
-					audioPlayer.animate({'volume': 0}, 1000, 'linear', function() {
+					audioPlayer.animate({'volume': 0}, 5000, 'linear', function() {
 						audioPlayer[0].pause();
 						pausingSong = false;
 						if (callback) callback();
