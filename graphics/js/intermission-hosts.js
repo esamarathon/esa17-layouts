@@ -64,15 +64,26 @@ $(function() {
 		}
 	}
 	
-	// Will add the actual song name once the player is designed.
-	var songName = 'Yours Truly (feat. Danyka Nadeau) (Aaron Jackson Remix) - Mr FijiWiji';
+	// Gets the current song name.
+	var songName = 'No Track Playing/No Data Available';
+	var songDataReplicant = nodecg.Replicant('songData', {defaultValue: 'No Track Playing/No Data Available'});
+	songDataReplicant.on('change', function(newValue) {
+		songName = newValue;
+	});
 	
+	// Stores if a song is playing (not paused).
+	var songPlayingReplicant = nodecg.Replicant('songPlaying', {defaultValue: false, persistent: false});
+	
+	// Song name is the data of the song playing when displayed, does not change while on screen.
 	function showMusicTicker() {
+		// If no song is playing, don't show this data.
+		if (!songPlayingReplicant.value) {showComingUpGame(); return;}
+		
 		var container = $('<div id="musicTicker" class="storageBox flexContainer"></div>');
 		$('<img class="mcat">').appendTo(container);
 		$('<div class="musicTickerText">'+songName+'</div>').appendTo(container);
 		showExtraDataMessage(container);
-		setTimeout(showComingUpGame, 30000);
+		setTimeout(showComingUpGame, 10000);
 	}
 	
 	function showExtraDataMessage(newHTML) {

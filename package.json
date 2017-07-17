@@ -25,6 +25,11 @@
     ],
     "graphics": [
       {
+        "file": "music-player.html",
+        "width": 1920,
+        "height": 1080
+      },
+	  {
         "file": "info-bar.html",
         "width": 1920,
         "height": 70
@@ -114,7 +119,16 @@
         "width": 1920,
         "height": 1080
       }
-    ]
+    ],
+    "dashboardPanels": [
+      {
+        "name": "music-player-controls",
+        "title": "Music Player Controls",
+        "width": 2,
+        "file": "music-player-controls.html",
+        "headerColor": "#008BB9"
+      }
+	]
   },
   "license": "Apache-2.0"
 }

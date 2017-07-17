@@ -23,29 +23,34 @@ $(function() {
 	var webcamHeader = 'Check out our 2nd stream! twitch.tv/geekygoonsquad';
 	webcamHeaderText.html(webcamHeader);
 	
-	// Will add the actual song name once the player is designed.
-	var songName = 'Yours Truly (feat. Danyka Nadeau) (Aaron Jackson Remix) - Mr FijiWiji';
-	musicTickerText.html(songName);
-	
-	// Hide the song name and make it so we can find out the whole width of the string.
-	musicTickerText.css('opacity', '0');
-	musicTickerText.css('flex', 'initial');
-	musicTickerText.css('overflow', 'visible');
-	
-	// Store the width.
-	var songLength = musicTickerText.css('width');
-	
-	// Reverse the changes from above.
-	musicTickerText.css('flex', 'auto');
-	musicTickerText.css('overflow', 'hidden');
-	musicTickerText.css('opacity', '1');
-	
-	// See if this needs a marquee effect to show the whole song name.
-	if (musicTickerText.css('width') <= songLength) {
-		musicTickerText.marquee({
-			'duration': 10000
+	var songDataReplicant = nodecg.Replicant('songData', {defaultValue: 'No Track Playing/No Data Available'});
+	songDataReplicant.on('change', function(newValue) {
+		// Hide the song name and make it so we can find out the whole width of the string.
+		musicTickerText.animate({'opacity': '0'}, 500, 'linear', function() {
+			musicTickerText.html(newValue);
+			musicTickerText.css('flex', 'initial');
+			musicTickerText.css('overflow', 'visible');
+		
+			// Store the width.
+			var songLength = musicTickerText.width();
+			
+			// Reverse the changes from above.
+			musicTickerText.css('flex', 'auto');
+			musicTickerText.css('overflow', 'hidden');
+			musicTickerText.animate({'opacity': '1'}, 500, 'linear');
+			
+			// See if this needs a marquee effect to show the whole song name.
+			var speed = songLength*12;
+			if (musicTickerText.width() <= songLength) {
+				musicTickerText.marquee({
+					'duration': speed,
+					'startVisible': true,
+					'duplicated': true,
+					'gap': 200
+				});
+			}
 		});
-	}
+	});
 	
 	var runDataArrayReplicant = nodecg.Replicant('runDataArray', speedcontrolBundle);
 	var runDataActiveRunReplicant = nodecg.Replicant('runDataActiveRun', speedcontrolBundle);

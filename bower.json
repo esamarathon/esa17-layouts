@@ -5,6 +5,8 @@
     "letteringjs": "^0.7.0",
     "moment": "^2.18.1",
     "jquery.marquee": "jQuery.Marquee#^1.4.1",
-    "jquery-animateNumber": "^0.0.14"
+    "jquery-animateNumber": "^0.0.14",
+    "jsmediatags": "^3.6.2",
+    "jquery-ui": "^1.12.1"
   }
 }

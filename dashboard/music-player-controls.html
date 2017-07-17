@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="components/jquery/dist/jquery.js"></script>
+	<script src="components/jquery-ui/jquery-ui.js"></script>
+	<script src="music-player-controls.js"></script>
+	<link rel="stylesheet" href="components/jquery-ui/themes/redmond/jquery-ui.css"/>
+	<style>
+		#forceResetPlayer, #skipSong, #pausePlaySong {
+			width: 100%;
+		}
+		
+		#isMusicPlaying {
+			padding-top: 5px;
+			font-size: 14px;
+		}
+		
+		#warningMsg {
+			font-weight: bold;
+			padding-bottom: 5px;
+			font-size: 14px;
+		}
+	</style>
+</head>
+<body>
+	<div id="warningMsg">In normal use, this panel shouldn't be needed. It can also be buggy, don't hit buttons too quickly and if it/the player breaks, refresh stuff!</div>
+	<div id="playerButtons">
+		<button type="button" id="pausePlaySong">Pause Song</button>
+		<button type="button" id="skipSong">Skip Song</button>
+		<button type="button" id="forceResetPlayer">Reset Playing Status</button>
+	</div>
+	<div id="isMusicPlaying"></div>
+</body>
+</html>
