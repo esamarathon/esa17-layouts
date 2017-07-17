@@ -37,12 +37,24 @@ $(function() {
 				
 				// For detecting when OBS can see the player.
 				if (isOBS) {
-					window.obsstudio.onVisibilityChange = function(visible) {
+					window.addEventListener('obsSceneChanged', function(evt) {
 						if (!skippingSong) {
-							if (visible) unpauseMusic();
-							else pauseMusic();
+							// Will unpause music on scenes with "intermission" in the name.
+							// This is a workaround to our older method because this works with Studio Mode.
+							if (evt.detail.name.toLowerCase().indexOf('intermission') >= 0)
+								unpauseMusic();
+							else
+								pauseMusic();
 						}
-					};
+					});
+					
+					window.obsstudio.getCurrentScene(function(data) {
+						// Stops music playing on page load if not actually on an intermission.
+						// Part of the workaround above.
+						data = JSON.parse(data);						
+						if (data.name.toLowerCase().indexOf('intermission') < 0)
+							pauseMusic();
+					});
 				}
 				
 				// For detecting when the player can be seen based on hashes on the end of the URL (for vMix).

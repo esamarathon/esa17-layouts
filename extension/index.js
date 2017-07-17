@@ -16,5 +16,5 @@ module.exports = function(nodecg) {
 			
 			callback(songs);
 		});
-	})
+	});
 };
