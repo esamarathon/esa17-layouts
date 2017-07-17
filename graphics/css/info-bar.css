@@ -35,7 +35,7 @@ body {
 
 /* Area that stores the donation total and STC logo stuff. */
 #donationArea {
-	flex: initial;
+	min-width: 257px;
 	font-size: 30px;
 	padding: 10px;
 }
@@ -57,13 +57,39 @@ body {
 	flex: auto;
 	border-left: 5px solid #662d91;
 	border-right: 5px solid #662d91;
+	font-size: 24px;
+	overflow: hidden;
+}
+
+#messageWrapper {
+	padding: 0 8px;
+	box-sizing: border-box;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	align-items: center; /* Aligns vertically. */
 	justify-content: flex-start; /* Aligns horizontally. */
-	padding: 15px;
-	font-size: 25px;
+	opacity: 0;
+}
+
+.donationWrapper .donationTitle {
+	text-transform: uppercase;
+	color: #bfbfbf;
+}
+
+/* Flag next to donator name is the same height as the text. */
+.donationWrapper .flag {
+	vertical-align: text-bottom;
+	height: 1.2em;
+}
+
+.donationWrapper .donationMessage {
+	white-space: nowrap;
+	overflow-x: hidden;
 }
 
 /* Area for the clock. */
 #clockArea {
 	font-size: 35px;
-	width: 130px;
+	min-width: 130px;
 }

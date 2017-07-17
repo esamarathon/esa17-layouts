@@ -8,9 +8,10 @@ function animationSetField(selector, newHTML) {
 	});
 }
 
-function animationFadeBetweenElements(selector1, selector2) {
-	$(selector1).animate({'opacity': '0'}, 500, 'linear');
-	$(selector2).animate({'opacity': '1'}, 500, 'linear');
+function animationFadeOutInElements(selector1, selector2) {
+	$(selector1).animate({'opacity': '0'}, 500, 'linear', function() {
+		$(selector2).animate({'opacity': '1'}, 500, 'linear');
+	});
 }
 
 // Animation lasts under 1 tick (5s) so no extra callbacks are needed.
