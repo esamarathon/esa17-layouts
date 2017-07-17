@@ -38,7 +38,7 @@ $(function() {
 				// For detecting when OBS can see the player.
 				if (isOBS) {
 					window.obsstudio.onVisibilityChange = function(visible) {
-						if (!skippingSong && !pausingSong) {
+						if (!skippingSong) {
 							if (visible) unpauseMusic();
 							else pauseMusic();
 						}
@@ -67,12 +67,12 @@ $(function() {
 						else {
 							if (location.hash !== '#visible') {
 								sceneLive = false;
-								if (!skippingSong && !pausingSong) pauseMusic();
+								if (!skippingSong) pauseMusic();
 							}
 							
 							else {
 								sceneLive = true;
-								if (!skippingSong && !pausingSong) unpauseMusic();
+								if (!skippingSong) unpauseMusic();
 							}
 						}
 						
@@ -120,6 +120,7 @@ $(function() {
 					pausingSong = true;
 					songPlayingReplicant.value = true;
 					audioPlayer[0].play();
+					audioPlayer.stop(); // stop any "animation" if it's going on
 					audioPlayer.animate({'volume': defaultVolume}, 5000, 'linear', function() {
 						pausingSong = false;
 					});
@@ -128,6 +129,7 @@ $(function() {
 				function pauseMusic(callback) {
 					pausingSong = true;
 					songPlayingReplicant.value = false;
+					audioPlayer.stop(); // stop any "animation" if it's going on
 					audioPlayer.animate({'volume': 0}, 5000, 'linear', function() {
 						audioPlayer[0].pause();
 						pausingSong = false;
