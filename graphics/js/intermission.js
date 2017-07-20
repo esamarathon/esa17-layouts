@@ -6,6 +6,7 @@ $(function() {
 	var firstStream = true;
 	if (typeof nodecg.bundleConfig !== 'undefined' && nodecg.bundleConfig.secondStream)
 		firstStream = false;
+	var channelNameToEmbed = (firstStream) ? 'geekygoonsquad' : 'esamarathon';
 	
 	// JQuery selectors.
 	var webcamArea = $('#webcam1');
@@ -18,10 +19,25 @@ $(function() {
 	var init = false;
 	var whenTotal = 0; // Totals all the estimates for calculating the "in about X" lines.
 	
-	// Twitch's own JavaScript implementation of their player sucks and I don't wanna rely on it,
-	// so need to do some of my own API calls to know when to add/remove this.
-	//twitchEmbed.html('<iframe src="https://player.twitch.tv/?muted&channel=geekygoonsquad" frameborder="0" scrolling="no" height="'+webcamArea.height()+'" width="'+webcamArea.width()+'"></iframe>');
-	//setTimeout(function() {twitchEmbed.html('');}, 10000);
+	var streamLive = false;
+	var otherStreamCurrentDataReplicant = nodecg.Replicant('otherStreamCurrentData', {persistent:false});
+	otherStreamCurrentDataReplicant.on('change', function(newValue) {
+		var newStreamLive;
+		if (newValue.stream)
+			newStreamLive = true;
+		else
+			newStreamLive = false;
+		
+		if (newStreamLive !== streamLive) {
+			if (newStreamLive) {
+				twitchEmbed.html('<iframe src="https://player.twitch.tv/?muted&channel='+channelNameToEmbed+'" frameborder="0" scrolling="no" height="'+webcamArea.height()+'" width="'+webcamArea.width()+'"></iframe>');
+			}
+			else 
+				twitchEmbed.html('');
+		}
+		
+		streamLive = newStreamLive;
+	});
 	
 	// This will change depending on if the stream is being displayed or not, and what stream the layouts are being
 	// displayed on.

@@ -19,6 +19,7 @@ $(function() {
 	var srcomDonationGoalsReplicant = nodecg.Replicant('srcomDonationGoals', speedcontrolBundle, {persistent:false, defaultValue:[]});
 	var srcomDonationBidwarsReplicant = nodecg.Replicant('srcomDonationBidwars', speedcontrolBundle, {persistent:false, defaultValue:[]});
 	var lastGoalShown = '';
+	var otherStreamCurrentDataReplicant = nodecg.Replicant('otherStreamCurrentData', {persistent:false});
 	
 	// This is where everything changes or checks for changes so they all happen at the same time.
 	// First timeout is a dirty hack to wait for the replicants to be ready.
@@ -173,7 +174,7 @@ $(function() {
 			$('#messageWrapper').html(html);
 			$('#messageWrapper').animate({'opacity': '1'}, 500, 'linear');
 			
-			if (donationMessage) {			
+			if (donationMessage) {
 				// Find actual length of donation total element.
 				$('.donationWrapper .donationMessage').css('overflow-x', 'scroll');
 				var donationMessageWidth = $('.donationWrapper .donationMessage')[0].scrollWidth;
@@ -200,7 +201,6 @@ $(function() {
 	}
 	
 	// Calls back when ready to be cleaned up on next tick.
-	// Could do with a twitch API check
 	function showOtherStreamMessage() {
 		showingMessage = true;
 		
@@ -208,13 +208,45 @@ $(function() {
 		$('#messageWrapper').animate({'opacity': '0'}, 500, 'linear', function() {
 			// Clear up message wrapper from last use if needed.
 			$('#messageWrapper').removeClass();
-			$('#messageWrapper').addClass('.altStreamWrapper');
+			$('#messageWrapper').addClass('altStreamWrapper');
 			
 			var otherStream = (firstStream) ? 'geekygoonsquad' : 'esamarathon'
-			$('#messageWrapper').html('Did you know ESA has 2 streams this year? Find the other one @ twitch.tv/'+otherStream);
+			
+			var html = 'Did you know ESA has 2 streams this year? Find the other one @ twitch.tv/'+otherStream;
+			
+			if (otherStreamCurrentDataReplicant.value && otherStreamCurrentDataReplicant.value.stream && otherStreamCurrentDataReplicant.value.stream.game) {
+				html += ' - currently playing '+otherStreamCurrentDataReplicant.value.stream.game;
+			}
+			
+			html = '<div class="altStreamText">'+html+'</div>';
+			
+			var amountToScroll = 0;
+			var timeToScrollFor = 10000; // 10 seconds default for donations that don't need to scroll.
+			
+			$('#messageWrapper').html(html);			
 			$('#messageWrapper').animate({'opacity': '1'}, 500, 'linear');
 			
-			setTimeout(function() {showingMessage = false;}, 10000);
+			// Find actual length of donation total element.
+			$('.altStreamWrapper .altStreamText').css('overflow-x', 'scroll');
+			var altStreamTextWidth = $('.altStreamWrapper .altStreamText')[0].scrollWidth;
+			$('.altStreamWrapper .altStreamText').css('overflow-x', 'hidden');
+			
+			var altStreamWrapperWidth = $('.altStreamWrapper').width();
+			
+			if (altStreamWrapperWidth < altStreamTextWidth) {
+				amountToScroll = altStreamTextWidth-altStreamWrapperWidth+10; //extra 10 for padding
+				timeToScrollFor = amountToScroll*10;
+			}
+			
+			if (amountToScroll > 0) {
+				$('.altStreamWrapper .altStreamText').delay(2500).animate({'margin-left': '-'+amountToScroll+'px'}, timeToScrollFor, 'linear', function() {
+					showingMessage = false;
+				});
+			}
+			
+			else {
+				setTimeout(function() {showingMessage = false;}, 2500+timeToScrollFor);
+			}
 		});
 	}
 	

@@ -1,6 +1,7 @@
 'use strict';
 module.exports = function(nodecg) {
 	var fs = require('fs');
+	require('./twitchapi')(nodecg);
 	
 	// Used to get list of songs from the MP3 directory for the music player.
 	nodecg.listenFor('getSongList', function(nonNeededVar, callback) {
