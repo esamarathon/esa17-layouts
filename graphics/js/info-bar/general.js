@@ -57,14 +57,28 @@ $(function() {
 		}
 	}
 	
+	var lastBigDonationObj;
+	var lastBigDonation;
+	var showLastBigDonation = false;
+	var lastBigDonationTimeout;
 	var newDonations = []; // Any new donations are stored for check on the ticks.
 	nodecg.listenFor('srcomNewDonation', speedcontrolBundle, function(donationObj) {
 		newDonations.push(donationObj);
+		
+		// Stores the last big donation that we got.
+		if (donationObj.amount >= 2000) { // $20+
+			lastBigDonationObj = donationObj;
+			showLastBigDonation = false;
+			clearTimeout(lastBigDonationTimeout);
+			lastBigDonationTimeout = setTimeout(function() {showLastBigDonation = true;}, 300000); // 5 minutes
+		}
 	});
 	
 	var showingMessage = false;
 	var messageIndex = 0;
 	function showMessages() {
+		var nothingDoneThisTime = false;
+		
 		// If we're showing a message right now, skip this tick.
 		if (!showingMessage) {
 			// We have donations to show, do that on this tick
@@ -87,12 +101,21 @@ $(function() {
 				}
 				
 				if (messageIndex === 3) {
-					// show last top big donation if applicable
-					showDonation(false, {'amount': 42069});
+					// Shows the last big top donation every 5 minutes.
+					if (showLastBigDonation && lastBigDonationObj) {
+						showLastBigDonation = false;
+						clearTimeout(lastBigDonationTimeout);
+						lastBigDonationTimeout = setTimeout(function() {showLastBigDonation = true;}, 300000); // 5 minutes
+						showDonation(false, lastBigDonationObj);
+					}
+					
+					else {nothingDoneThisTime = true;}
 				}
 				
 				messageIndex++;
 				if (messageIndex > 3) messageIndex = 0;
+				
+				if (nothingDoneThisTime) showMessages();
 			}
 		}
 	}
