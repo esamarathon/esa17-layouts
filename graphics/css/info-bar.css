@@ -88,6 +88,16 @@ body {
 	overflow-x: hidden;
 }
 
+.nextGameWrapper {
+	padding: 0 !important;
+	padding-left: 10px !important;
+}
+
+.nextGameWrapper .nextGameText {
+	white-space: nowrap;
+	overflow-x: hidden;
+}
+
 /* Area for the clock. */
 #clockArea {
 	font-size: 35px;

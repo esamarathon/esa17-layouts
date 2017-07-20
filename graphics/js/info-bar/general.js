@@ -10,6 +10,9 @@ $(function() {
 	// Declaring other variables.
 	var tickRate = 5000; // Everything changes/updates every 5 seconds.
 	
+	var runDataArrayReplicant = nodecg.Replicant('runDataArray', speedcontrolBundle);
+	var runDataActiveRunReplicant = nodecg.Replicant('runDataActiveRun', speedcontrolBundle);
+	
 	// This is where everything changes or checks for changes so they all happen at the same time.
 	// First timeout is a dirty hack to wait for the replicants to be ready.
 	setTimeout(tick, 100); setInterval(tick, tickRate);
@@ -93,7 +96,16 @@ $(function() {
 				}
 				
 				if (messageIndex === 1) {
-					showComingUpNext();
+					var indexOfCurrentRun = findIndexInRunDataArray(runDataActiveRunReplicant.value, runDataArrayReplicant.value);
+					if (!runDataArrayReplicant.value[indexOfCurrentRun+1] || 
+					runDataArrayReplicant.value[indexOfCurrentRun+1].game.toLowerCase().indexOf('offline') >= 0 || 
+					runDataArrayReplicant.value[indexOfCurrentRun+1].game.toLowerCase().indexOf('setup') >= 0) { 	nothingDoneThisTime = true;
+					}
+					
+					else {
+						showComingUpNext(runDataArrayReplicant.value[indexOfCurrentRun+1]);
+					}
+					
 				}
 				
 				if (messageIndex === 2) {
@@ -207,7 +219,7 @@ $(function() {
 	}
 	
 	// Calls back when ready to be cleaned up on next tick.
-	function showComingUpNext() {
+	function showComingUpNext(runData) {
 		showingMessage = true;
 		
 		// Fade out whatever was in the message wrapper before.
@@ -215,8 +227,37 @@ $(function() {
 			// Clear up message wrapper from last use if needed.
 			$('#messageWrapper').removeClass();
 			
-			$('#messageWrapper').html('This is where we should show the next game coming up.');
+			$('#messageWrapper').addClass('nextGameWrapper');
+			
+			$('#messageWrapper').html('<div class="nextGameText">Coming up next: '+runData.game+' ('+runData.category+') by '+formPlayerNamesString(runData)+'Coming up next: '+runData.game+' ('+runData.category+') by '+formPlayerNamesString(runData)+'Coming up next: '+runData.game+' ('+runData.category+') by '+formPlayerNamesString(runData)+'</div>');
+
+			var amountToScroll = 0;
+			var timeToScrollFor = 10000; // 10 seconds default for donations that don't need to scroll.
+			
+			$('#messageWrapper').html('<div class="nextGameText">Coming up next: '+runData.game+' ('+runData.category+') by '+formPlayerNamesString(runData)+'</div>');
 			$('#messageWrapper').animate({'opacity': '1'}, 500, 'linear');
+			
+			// Find actual length of donation total element.
+			$('.nextGameWrapper .nextGameText').css('overflow-x', 'scroll');
+			var nextGameTextWidth = $('.nextGameWrapper .nextGameText')[0].scrollWidth;
+			$('.nextGameWrapper .nextGameText').css('overflow-x', 'hidden');
+			
+			var nextGameWrapperWidth = $('.nextGameWrapper').width();
+			
+			if (nextGameWrapperWidth < nextGameTextWidth) {
+				amountToScroll = nextGameTextWidth-nextGameWrapperWidth+10; //extra 10 for padding
+				timeToScrollFor = amountToScroll*10;
+			}
+			
+			if (amountToScroll > 0) {
+				$('.nextGameWrapper .nextGameText').delay(2500).animate({'margin-left': '-'+amountToScroll+'px'}, timeToScrollFor, 'linear', function() {
+					showingMessage = false;
+				});
+			}
+			
+			else {
+				setTimeout(function() {showingMessage = false;}, 2500+timeToScrollFor);
+			}
 			
 			setTimeout(function() {showingMessage = false;}, 10000);
 		});
