@@ -9,3 +9,13 @@ The music player component also requires OBS Studio Browser Source v1.30 or high
 - `npm install nodecg-cli` and install NodeCG
 - `nodecg install speedcontrol/nodecg-speedcontrol` to install the master version of nodecg-speedcontrol.
 - `nodecg install esamarathon/esa17-layouts` to install this layout bundle.
+
+A config file `esa17-layouts.json` can be made and contain this:
+
+```
+{
+	"secondStream": true
+}
+```
+
+If `"secondStream"` is set to `true`, then certain parts of the code change things that display on the layout so they are more relevant. Default is `false`.

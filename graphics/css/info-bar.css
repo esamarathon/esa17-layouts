@@ -98,6 +98,20 @@ body {
 	overflow-x: hidden;
 }
 
+.altStreamWrapper {
+	padding: 10px !important;
+}
+
+.goalWrapper {
+	padding: 0 !important;
+	padding-left: 10px !important;
+}
+
+.goalWrapper .goalText {
+	white-space: nowrap;
+	overflow-x: hidden;
+}
+
 /* Area for the clock. */
 #clockArea {
 	font-size: 35px;

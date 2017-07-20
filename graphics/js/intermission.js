@@ -3,6 +3,10 @@ $(function() {
 	// The bundle name where all the run information is pulled from.
 	var speedcontrolBundle = 'nodecg-speedcontrol';
 	
+	var firstStream = true;
+	if (typeof nodecg.bundleConfig !== 'undefined' && nodecg.bundleConfig.secondStream)
+		firstStream = false;
+	
 	// JQuery selectors.
 	var webcamArea = $('#webcam1');
 	var twitchEmbed = $('#twitchEmbed');
@@ -19,8 +23,13 @@ $(function() {
 	//twitchEmbed.html('<iframe src="https://player.twitch.tv/?muted&channel=geekygoonsquad" frameborder="0" scrolling="no" height="'+webcamArea.height()+'" width="'+webcamArea.width()+'"></iframe>');
 	//setTimeout(function() {twitchEmbed.html('');}, 10000);
 	
-	// This will change depending on if the stream is being displayed or not.
-	var webcamHeader = 'Check out our 2nd stream! twitch.tv/geekygoonsquad';
+	// This will change depending on if the stream is being displayed or not, and what stream the layouts are being
+	// displayed on.
+	var webcamHeader = 'Check out our other stream! twitch.tv/';
+	if (firstStream)
+		webcamHeader += 'geekygoonsquad';
+	else 
+		webcamHeader += 'esamarathon';
 	webcamHeaderText.html(webcamHeader);
 	
 	var songDataReplicant = nodecg.Replicant('songData', {defaultValue: 'No Track Playing/No Data Available'});

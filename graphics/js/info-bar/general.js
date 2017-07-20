@@ -1,5 +1,9 @@
 'use strict';
 $(function() {
+	var firstStream = true;
+	if (typeof nodecg.bundleConfig !== 'undefined' && nodecg.bundleConfig.secondStream)
+		firstStream = false;
+	
 	// The bundle name where all the run information is pulled from.
 	var speedcontrolBundle = 'nodecg-speedcontrol';
 	
@@ -12,10 +16,13 @@ $(function() {
 	
 	var runDataArrayReplicant = nodecg.Replicant('runDataArray', speedcontrolBundle);
 	var runDataActiveRunReplicant = nodecg.Replicant('runDataActiveRun', speedcontrolBundle);
+	var srcomDonationGoalsReplicant = nodecg.Replicant('srcomDonationGoals', speedcontrolBundle, {persistent:false, defaultValue:[]});
+	var srcomDonationBidwarsReplicant = nodecg.Replicant('srcomDonationBidwars', speedcontrolBundle, {persistent:false, defaultValue:[]});
+	var lastGoalShown = '';
 	
 	// This is where everything changes or checks for changes so they all happen at the same time.
 	// First timeout is a dirty hack to wait for the replicants to be ready.
-	setTimeout(tick, 100); setInterval(tick, tickRate);
+	setTimeout(tick, 200); setInterval(tick, tickRate);
 	function tick() {
 		changeDonationTotalStuff();
 		showMessages();
@@ -92,7 +99,13 @@ $(function() {
 			
 			else {
 				if (messageIndex === 0) {
-					showDonationGoal({});
+					if ((srcomDonationGoalsReplicant.value && srcomDonationGoalsReplicant.value.length >= 1) || (srcomDonationBidwarsReplicant.value && srcomDonationBidwarsReplicant.value.length >= 1)) {
+						showDonationGoal();
+					}
+					
+					else {
+						nothingDoneThisTime = true;
+					}
 				}
 				
 				if (messageIndex === 1) {
@@ -187,6 +200,7 @@ $(function() {
 	}
 	
 	// Calls back when ready to be cleaned up on next tick.
+	// Could do with a twitch API check
 	function showOtherStreamMessage() {
 		showingMessage = true;
 		
@@ -194,8 +208,10 @@ $(function() {
 		$('#messageWrapper').animate({'opacity': '0'}, 500, 'linear', function() {
 			// Clear up message wrapper from last use if needed.
 			$('#messageWrapper').removeClass();
+			$('#messageWrapper').addClass('.altStreamWrapper');
 			
-			$('#messageWrapper').html('Did you know we have 2 streams? Go check out the other one!');
+			var otherStream = (firstStream) ? 'geekygoonsquad' : 'esamarathon'
+			$('#messageWrapper').html('Did you know ESA has 2 streams this year? Find the other one @ twitch.tv/'+otherStream);
 			$('#messageWrapper').animate({'opacity': '1'}, 500, 'linear');
 			
 			setTimeout(function() {showingMessage = false;}, 10000);
@@ -203,18 +219,50 @@ $(function() {
 	}
 	
 	// Calls back when ready to be cleaned up on next tick.
-	function showDonationGoal(goalObj) {
+	function showDonationGoal() {
 		showingMessage = true;
 		
 		// Fade out whatever was in the message wrapper before.
 		$('#messageWrapper').animate({'opacity': '0'}, 500, 'linear', function() {
 			// Clear up message wrapper from last use if needed.
 			$('#messageWrapper').removeClass();
+			$('#messageWrapper').addClass('goalWrapper');
 			
-			$('#messageWrapper').html('This is where we should show the goals and bidwars coming up.');
+			// Combined list of goals/bidwars, removing the last one shown if it exists and we have more to show.
+			var goalsAndBidwars = srcomDonationGoalsReplicant.value.concat(srcomDonationBidwarsReplicant.value);
+			var indexOfLastInfo = _.findIndex(goalsAndBidwars, {'id':lastGoalShown});
+			if (indexOfLastInfo >= 0 && goalsAndBidwars.length > 1) goalsAndBidwars.splice(indexOfLastInfo, 1);
+			
+			var randomElement = _.sample(goalsAndBidwars);
+			lastGoalShown = randomElement.id;
+			
+			var amountToScroll = 0;
+			var timeToScrollFor = 10000; // 10 seconds default for donations that don't need to scroll.
+			
+			$('#messageWrapper').html('<div class="goalText">'+formatDonationGoalMessage(randomElement)+'</div>');
 			$('#messageWrapper').animate({'opacity': '1'}, 500, 'linear');
 			
-			setTimeout(function() {showingMessage = false;}, 10000);
+			// Find actual length of donation total element.
+			$('.goalWrapper .goalText').css('overflow-x', 'scroll');
+			var nextGameTextWidth = $('.goalWrapper .goalText')[0].scrollWidth;
+			$('.goalWrapper .goalText').css('overflow-x', 'hidden');
+			
+			var nextGameWrapperWidth = $('.goalWrapper').width();
+			
+			if (nextGameWrapperWidth < nextGameTextWidth) {
+				amountToScroll = nextGameTextWidth-nextGameWrapperWidth+10; //extra 10 for padding
+				timeToScrollFor = amountToScroll*10;
+			}
+			
+			if (amountToScroll > 0) {
+				$('.goalWrapper .goalText').delay(2500).animate({'margin-left': '-'+amountToScroll+'px'}, timeToScrollFor, 'linear', function() {
+					showingMessage = false;
+				});
+			}
+			
+			else {
+				setTimeout(function() {showingMessage = false;}, 2500+timeToScrollFor);
+			}
 		});
 	}
 	
@@ -228,13 +276,11 @@ $(function() {
 			$('#messageWrapper').removeClass();
 			
 			$('#messageWrapper').addClass('nextGameWrapper');
-			
-			$('#messageWrapper').html('<div class="nextGameText">Coming up next: '+runData.game+' ('+runData.category+') by '+formPlayerNamesString(runData)+'Coming up next: '+runData.game+' ('+runData.category+') by '+formPlayerNamesString(runData)+'Coming up next: '+runData.game+' ('+runData.category+') by '+formPlayerNamesString(runData)+'</div>');
 
 			var amountToScroll = 0;
 			var timeToScrollFor = 10000; // 10 seconds default for donations that don't need to scroll.
 			
-			$('#messageWrapper').html('<div class="nextGameText">Coming up next: '+runData.game+' ('+runData.category+') by '+formPlayerNamesString(runData)+'</div>');
+			$('#messageWrapper').html('<div class="nextGameText">COMING UP NEXT: '+runData.game+' ('+runData.category+') by '+formPlayerNamesString(runData)+'</div>');
 			$('#messageWrapper').animate({'opacity': '1'}, 500, 'linear');
 			
 			// Find actual length of donation total element.
@@ -258,8 +304,6 @@ $(function() {
 			else {
 				setTimeout(function() {showingMessage = false;}, 2500+timeToScrollFor);
 			}
-			
-			setTimeout(function() {showingMessage = false;}, 10000);
 		});
 	}
 	
@@ -293,5 +337,29 @@ $(function() {
 		var message = donationObj.comment.replace(/\n/g, ' ').replace( /\s\s+/g, ' ');
 		var html = '<div class="donationMessage">'+message+'</div>';
 		return html;
+	}
+	
+	// TAKEN FROM DHS17
+	// Format goal/bidwar messages.
+	function formatDonationGoalMessage(goalObj) {
+		var bidwar = (goalObj.goals) ? true : false;
+		var message = (bidwar) ? 'COMING UP BIDWAR: ' : 'COMING UP DONATION GOAL: ';
+		
+		message += goalObj.title;
+		if (!bidwar)
+			message += ' - ' + '$'+(goalObj.current/100).toFixed(2)+'/'+'$'+(goalObj.minimum/100).toFixed(2);
+		else {
+			var goalsForBidwar = goalObj.goals.data;
+			var goalsTotals = [];
+			
+			goalsForBidwar.forEach(function(goal) {
+				var goalTotalMessage = goal.title + ' (' + '$'+(goal.current/100).toFixed(2) + ')';
+				goalsTotals.push(goalTotalMessage);
+			});
+			
+			message += ' - ' + goalsTotals.join(' / ');
+		}
+		
+		return message;
 	}
 });
