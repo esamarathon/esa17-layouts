@@ -28,7 +28,7 @@ $(function() {
 	
 	$('#logoSelector').submit(function(event) {
 		event.preventDefault();
-		var option = $('form#logoSelector').serializeArray()[0].value;
+		var option = $('#logoSelector').serializeArray()[0].value;
 		currentPremiumSponsorImage.value = option;
 	});
 });

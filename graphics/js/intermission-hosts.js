@@ -90,9 +90,20 @@ $(function() {
 		animationSetField(extraDataBoxWrapper, newHTML);
 	}
 	
+	var hostData = nodecg.Replicant('hostData', {defaultValue: []});
+	
+	hostsWrapper.html('');
+	
+	hostData.on('change', function(newValue) {
+		hostsWrapper.html('')
+		newValue.forEach(function(user, index) {
+			createHostContainer(user, index).appendTo(hostsWrapper);
+		});
+	});
+	
 	// Temp code until the actual hosts stuff is implemented with their own dashboard.
 	// Their data and the triggers for showing this will then be triggered by them.
-	addFakeHosts();
+	//addFakeHosts();
 	function addFakeHosts() {
 		hostsWrapper.animate({'opacity': '0'}, 500, 'linear', function() {
 			hostsWrapper.html('');
