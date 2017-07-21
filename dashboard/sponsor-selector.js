@@ -10,6 +10,7 @@ $(function() {
 	var sponsorImagesPremium = nodecg.Replicant('assets:premiumsponsors');
 	sponsorImagesPremium.on('change', function(newValue) {
 		if (newValue) {
+			$('#logoSelector').html('');
 			newValue.forEach(function(logo) {
 					$('#logoSelector')
 						.append($("<input></input>")

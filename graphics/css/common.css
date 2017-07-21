@@ -131,10 +131,24 @@ body {
 /* Not sure how sponsor images are working yet, so a temporary black box for now. */
 .sponsorImageArea {
 	position: fixed;
+}
+
+.sponsorLogo {
+	width: inherit;
+	height: inherit;
 	background-image: url('../images/esa-logo-16_9-3p.png');
 	background-repeat: no-repeat;
 	background-size: contain;
 	background-position: center;
+}
+
+.sponsorLogoCurrent {
+	position: absolute;
+	opacity: 1;
+}
+
+.sponsorLogoNext {
+	opacity: 0;
 }
 
 /* This sponsor image is used on a lot of layouts in the same space, so everything is defined here. */

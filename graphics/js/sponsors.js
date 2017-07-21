@@ -1,16 +1,12 @@
 'use strict';
 $(function() {
-	// The bundle name where all the run information is pulled from.
-	var speedcontrolBundle = 'nodecg-speedcontrol';
-	
 	// JQuery selectors.
 	var sponsorImageAreaNormal = $('#sponsorImageAreaNormal');
 	
 	if ($('#sponsorImageAreaTopPremium').length > 0)
 		var sponsorImageAreaPremium = $('#sponsorImageAreaTopPremium');
-	else if ($('#sponsorImageAreaPremium').length > 0) {
+	else if ($('#sponsorImageAreaPremium').length > 0)
 		var sponsorImageAreaPremium = $('#sponsorImageAreaPremium');
-	}
 	
 	if (!sponsorImageAreaPremium)
 		var sponsorImageAreaPremium = sponsorImageAreaNormal;
@@ -43,7 +39,16 @@ $(function() {
 	}
 	
 	function changeSponsorImage(element, assetURL) {
-		element.css('background-image', 'url("'+assetURL+'")');
+		$('.sponsorLogoCurrent', element).animate({'opacity': '0'}, 500, 'linear');
+		
+		element.append('<div class="sponsorLogo sponsorLogoNext"></div>');
+		
+		$('.sponsorLogoNext', element).css('background-image', 'url("'+assetURL+'")')
+		
+		$('.sponsorLogoNext', element).animate({'opacity': '1'}, 500, 'linear', function() {
+			$('.sponsorLogoCurrent', element).remove();
+			$('.sponsorLogoNext', element).removeClass('sponsorLogoNext').addClass('sponsorLogoCurrent');
+		});
 	}
 	
 	
