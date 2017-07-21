@@ -14,6 +14,7 @@
 	<script src="js/games/run-info.js"></script>
 	<script src="js/games/player-info.js"></script>
 	<script src="js/games/timer.js"></script>
+	<script src="js/sponsors.js"></script>
 </head>
 <body>
 <div id="windowContainer">
@@ -55,9 +56,10 @@
 	
 	<!-- Timer -->
 	<div id="timerContainer" class="storageBox flexContainer">
-		<!-- No extra div here (in this layout these are both on the same line). -->
-		<div id="timer"></div>
-		<div id="gameEstimate"></div>
+		<div><!-- An extra div is needed to make sure all of these are on individual lines. -->
+			<div id="timer"></div>
+			<div id="gameEstimate"></div>
+		</div>
 	</div>
 </div>
 </body>

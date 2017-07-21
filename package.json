@@ -132,8 +132,37 @@
         "width": 2,
         "file": "music-player-controls.html",
         "headerColor": "#008BB9"
+      },
+	  {
+        "name": "sponsor-selector",
+        "title": "Premium Sponsor",
+        "width": 2,
+        "file": "sponsor-selector.html",
+        "headerColor": "#008BB9"
       }
-    ]
+    ],
+	"assetCategories": [
+		{
+			"name": "premiumsponsors",
+			"title": "Premium Sponsor Logos",
+			"allowedTypes": [
+				"jpg",
+				"jpeg",
+				"png",
+				"gif"
+			]
+		},
+		{
+			"name": "normalsponsors",
+			"title": "Normal Sponsor Logos",
+			"allowedTypes": [
+				"jpg",
+				"jpeg",
+				"png",
+				"gif"
+			]
+		}
+	]
   },
   "license": "Apache-2.0",
   "dependencies": {

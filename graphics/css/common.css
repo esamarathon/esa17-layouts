@@ -131,7 +131,10 @@ body {
 /* Not sure how sponsor images are working yet, so a temporary black box for now. */
 .sponsorImageArea {
 	position: fixed;
-	background-color: black;
+	background-image: url('../images/esa-logo-16_9-3p.png');
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-position: center;
 }
 
 /* This sponsor image is used on a lot of layouts in the same space, so everything is defined here. */

@@ -1,9 +1,9 @@
 /* Logos/sponsors */
 #sponsorImageAreaNormal {
 	left: 10px;
-	top: 544px;
-	width: 158px;
-	height: 321px;
+	top: 890px;
+	width: 618px;
+	height: 110px;
 }
 
 /* Webcam(s) */
@@ -28,7 +28,7 @@
 
 /* 2nd 3DS screen */
 #gameCapture1B {
-	left: 182px;
+	left: 100px;
 	top: 534px;
 	width: 455px;
 	height: 341px;
@@ -60,9 +60,9 @@
 
 /* Run information stuff */
 #runInfoContainer {
-	left: 643px;
+	left: 1007px;
 	top: 880px;
-	width: 1277px;
+	width: 913px;
 	height: 115px;
 }
 
@@ -71,12 +71,12 @@
 
 /* Timer stuff*/
 #timerContainer {
-	left: 0px;
+	left: 643px;
 	top: 880px;
-	width: 638px;
+	width: 359px;
 	height: 116px;
 }
 
 /* Margins might need playing around with and some eyeballing to get timer text closer and still centered. */
-#timerContainer #timer {font-size: 78px; margin: 10px;}
-#timerContainer #gameEstimate {font-size: 35px; margin: 10px;}
+#timerContainer #timer {font-size: 76px; margin: -15px;}
+#timerContainer #gameEstimate {font-size: 34px; margin: -2px;}

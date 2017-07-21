@@ -1,9 +1,9 @@
 /* Logos/sponsors */
 #sponsorImageAreaNormal {
 	left: 10px;
-	top: 608px;
-	width: 179px;
-	height: 392px;
+	top: 890px;
+	width: 704px;
+	height: 110px;
 }
 
 /* Webcam(s) */
@@ -55,10 +55,10 @@
 
 /* Run information stuff */
 #runInfoContainer {
-	left: 204px;
+	left: 0px;
 	top: 598px;
-	width: 520px;
-	height: 243px;
+	width: 724px;
+	height: 182px;
 }
 
 #runInfoContainer #gameTitle {font-size: 33px;}
@@ -66,12 +66,12 @@
 
 /* Timer stuff*/
 #timerContainer {
-	left: 204px;
-	top: 846px;
-	width: 520px;
-	height: 149px;
+	left: 0px;
+	top: 785px;
+	width: 724px;
+	height: 90px;
 }
 
 /* Margins might need playing around with and some eyeballing to get timer text closer and still centered. */
-#timerContainer #timer {font-size: 91px; margin: -15px;}
-#timerContainer #gameEstimate {font-size: 45px; margin: -5px;}
+#timerContainer #timer {font-size: 87px; margin: 7px;}
+#timerContainer #gameEstimate {font-size: 43px; margin: 7px;}

@@ -4,21 +4,20 @@
 }
 
 /* Logos/sponsors */
-.sponsorImageAreaNormal {
+#sponsorImageAreaNormal {
 	top: 739px;
-	width: 222px;
+	width: 469px;
 	height: 261px;
+	left: 10px;
 }
-#sponsorImageAreaNormal1 {left: 10px;}
-#sponsorImageAreaNormal2 {left: 1683px;}
 
 /* A really big flex box wrapper that the information on screen goes in. */
 #intermissionDataWrapper {
 	position: fixed;
 	display: flex;
-	left: 242px;
+	left: 489px;
 	top: 114px;
-	width: 1431px;
+	width: 1421px;
 	height: 886px;
 	align-items: flex-end; /* Aligns vertically. */
 	justify-content: center; /* Aligns horizontally. */
@@ -81,3 +80,7 @@
 }
 .musicTickerText {padding-right: 10px;}
 .mcat {padding-right: 10px;}
+
+.sponsorImageArea {
+	background-position: center bottom;
+}
