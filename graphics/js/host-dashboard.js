@@ -14,7 +14,7 @@ $(function() {
 		$('#hostList').html('');
 		hostAmount = 0;
 		
-		newValue.forEach(function(user) {	
+		newValue.forEach(function(user) {
 			var hostElement = $('<div class="hostInputContainer"><input type="text" name="hostName" placeholder="Username" value="'+user.name+'" class="hostInput"><img class="flag"><input type="button" class="removeUser" value="Remove"></div>');
 			
 			if (user.region) {
@@ -60,8 +60,20 @@ $(function() {
 		$('.flag').css('opacity',0.5);
 		
 		async.eachSeries(inputs, function(user, callback) {
+			// Allow people to specify regions manually in the format USER#REGION
+			var regexMatch = user.value.match(/[0-9a-zA-Z ]+(#[0-9a-zA-Z]+)/);
+			
 			// Ignore boxes that are blank.
 			if (user.value === '') callback();
+			
+			else if (regexMatch) {
+				var name = regexMatch[0];
+				var region = regexMatch[1].substring(1); // region really needs checking but is hard to
+				
+				var hostDataObj = {name: name, region:region};
+				newHostData.push(hostDataObj);
+				callback();
+			}
 			
 			else {
 				var hostDataObj = {name: user.value};

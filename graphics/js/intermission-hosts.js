@@ -146,7 +146,7 @@ $(function() {
 		}
 		
 		if (flagURL) {
-			var flag = $('<img class="playerFlag">');
+			var flag = $('<img class="playerFlag" onerror="imgError(this)">');
 			flag.attr('src', flagURL);
 			flag.appendTo(container);
 		}
