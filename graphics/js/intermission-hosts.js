@@ -91,37 +91,45 @@ $(function() {
 	}
 	
 	var hostData = nodecg.Replicant('hostData', {defaultValue: []});
+	var hostDisplayStatus = nodecg.Replicant('hostDisplayStatus', {defaultValue: false});
+	hostDisplayStatus.value = false; // make sure this is set correctly on page load
 	
-	hostsWrapper.html('');
+	var hostStatusChanging = false;
+	var tempShowTimeout;
 	
-	hostData.on('change', function(newValue) {
-		hostsWrapper.html('')
-		newValue.forEach(function(user, index) {
-			createHostContainer(user, index).appendTo(hostsWrapper);
-		});
+	nodecg.listenFor('showHosts', function() {
+		if (!hostStatusChanging) showHosts();
 	});
 	
-	// Temp code until the actual hosts stuff is implemented with their own dashboard.
-	// Their data and the triggers for showing this will then be triggered by them.
-	//addFakeHosts();
-	function addFakeHosts() {
+	nodecg.listenFor('showHostsTemp', function() {
+		if (!hostStatusChanging) {
+			showHosts();
+			tempShowTimeout = setTimeout(hideHosts, 30000);
+		}
+	});	
+	
+	nodecg.listenFor('hideHosts', function() {
+		if (!hostStatusChanging) hideHosts();
+	});
+	
+	function showHosts() {
+		hostStatusChanging = true;
+		hostsWrapper.html('');
+		hostData.value.forEach(function(user, index) {
+			createHostContainer(user, index).appendTo(hostsWrapper);
+		});
+		hostsWrapper.animate({'opacity': '1'}, 500, 'linear', function() {
+			hostStatusChanging = false;
+		});
+		hostDisplayStatus.value = true;
+	}
+	
+	function hideHosts() {
+		hostStatusChanging = true;
+		clearTimeout(tempShowTimeout);
+		hostDisplayStatus.value = false;
 		hostsWrapper.animate({'opacity': '0'}, 500, 'linear', function() {
-			hostsWrapper.html('');
-			for (var i = 0; i < 4; i++) {
-				var hostData = {
-					name: 'ASampleName',
-					region: 'SE'
-				}
-				
-				createHostContainer(hostData, i).appendTo(hostsWrapper);
-			}
-			
-			hostsWrapper.animate({'opacity': '1'}, 500, 'linear');
-			
-			setTimeout(function() {
-				hostsWrapper.animate({'opacity': '0'}, 500, 'linear');
-				setTimeout(addFakeHosts, 10000);
-			}, 10000);
+			hostStatusChanging = false;
 		});
 	}
 	

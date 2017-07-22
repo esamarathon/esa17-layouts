@@ -1,4 +1,7 @@
 'use strict';
+
+var app = require('express')();
+
 module.exports = function(nodecg) {
 	var fs = require('fs');
 	require('./twitchapi')(nodecg);
@@ -18,4 +21,27 @@ module.exports = function(nodecg) {
 			callback(songs);
 		});
 	});
+	
+	var hostControlRouter = require('express').Router();
+	app.use('/hostcontrol', hostControlRouter);
+	
+	hostControlRouter.get("/showhosts", function(req, res) {
+		nodecg.sendMessage('showHosts');		
+		res.status(200);
+		res.end();
+	});
+	
+	hostControlRouter.get("/showhoststemp", function(req, res) {
+		nodecg.sendMessage('showHostsTemp');		
+		res.status(200);
+		res.end();
+	});
+	
+	hostControlRouter.get("/hidehosts", function(req, res) {
+		nodecg.sendMessage('hideHosts');		
+		res.status(200);
+		res.end();
+	});
+	
+    nodecg.mount(app);
 };
