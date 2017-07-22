@@ -29,6 +29,16 @@
         "width": 1920,
         "height": 1080
       },
+	  {
+        "file": "run-twitch-ad.html",
+        "width": 1920,
+        "height": 1080
+      },
+      {
+        "file": "host-dashboard.html",
+        "width": 1920,
+        "height": 1080
+      },
       {
         "file": "info-bar.html",
         "width": 1920,
@@ -121,11 +131,6 @@
       },
       {
         "file": "16_10-1p.html",
-        "width": 1920,
-        "height": 1080
-      },
-      {
-        "file": "host-dashboard.html",
         "width": 1920,
         "height": 1080
       }
