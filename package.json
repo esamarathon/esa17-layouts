@@ -29,7 +29,7 @@
         "width": 1920,
         "height": 1080
       },
-	  {
+      {
         "file": "run-twitch-ad.html",
         "width": 1920,
         "height": 1080
@@ -143,7 +143,7 @@
         "file": "music-player-controls.html",
         "headerColor": "#008BB9"
       },
-	  {
+      {
         "name": "sponsor-selector",
         "title": "Premium Sponsor",
         "width": 2,
@@ -151,31 +151,32 @@
         "headerColor": "#008BB9"
       }
     ],
-	"assetCategories": [
-		{
-			"name": "premiumsponsors",
-			"title": "Premium Sponsor Logos",
-			"allowedTypes": [
-				"jpg",
-				"jpeg",
-				"png",
-				"gif"
-			]
-		},
-		{
-			"name": "normalsponsors",
-			"title": "Normal Sponsor Logos",
-			"allowedTypes": [
-				"jpg",
-				"jpeg",
-				"png",
-				"gif"
-			]
-		}
-	]
+    "assetCategories": [
+      {
+        "name": "premiumsponsors",
+        "title": "Premium Sponsor Logos",
+        "allowedTypes": [
+          "jpg",
+          "jpeg",
+          "png",
+          "gif"
+        ]
+      },
+      {
+        "name": "normalsponsors",
+        "title": "Normal Sponsor Logos",
+        "allowedTypes": [
+          "jpg",
+          "jpeg",
+          "png",
+          "gif"
+        ]
+      }
+    ]
   },
   "license": "Apache-2.0",
   "dependencies": {
+    "moment": "^2.18.1",
     "needle": "^1.6.0"
   }
 }

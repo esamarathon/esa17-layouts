@@ -190,7 +190,11 @@ $(function() {
 			
 			if (amountToScroll > 0) {
 				$('.donationWrapper .donationMessage').delay(2500).animate({'margin-left': '-'+amountToScroll+'px'}, timeToScrollFor, 'linear', function() {
-					showingMessage = false;
+					if (timeToScrollFor < 10000) {
+						setTimeout(function() {showingMessage = false;}, 10000-timeToScrollFor);
+					}
+					
+					else showingMessage = false;
 				});
 			}
 			
@@ -240,7 +244,11 @@ $(function() {
 			
 			if (amountToScroll > 0) {
 				$('.altStreamWrapper .altStreamText').delay(2500).animate({'margin-left': '-'+amountToScroll+'px'}, timeToScrollFor, 'linear', function() {
-					showingMessage = false;
+					if (timeToScrollFor < 10000) {
+						setTimeout(function() {showingMessage = false;}, 10000-timeToScrollFor);
+					}
+					
+					else showingMessage = false;
 				});
 			}
 			
@@ -288,7 +296,11 @@ $(function() {
 			
 			if (amountToScroll > 0) {
 				$('.goalWrapper .goalText').delay(2500).animate({'margin-left': '-'+amountToScroll+'px'}, timeToScrollFor, 'linear', function() {
-					showingMessage = false;
+					if (timeToScrollFor < 10000) {
+						setTimeout(function() {showingMessage = false;}, 10000-timeToScrollFor);
+					}
+					
+					else showingMessage = false;
 				});
 			}
 			
@@ -329,7 +341,11 @@ $(function() {
 			
 			if (amountToScroll > 0) {
 				$('.nextGameWrapper .nextGameText').delay(2500).animate({'margin-left': '-'+amountToScroll+'px'}, timeToScrollFor, 'linear', function() {
-					showingMessage = false;
+					if (timeToScrollFor < 10000) {
+						setTimeout(function() {showingMessage = false;}, 10000-timeToScrollFor);
+					}
+					
+					else showingMessage = false;
 				});
 			}
 			

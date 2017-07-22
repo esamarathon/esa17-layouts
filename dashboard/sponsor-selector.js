@@ -10,9 +10,9 @@ $(function() {
 	var sponsorImagesPremium = nodecg.Replicant('assets:premiumsponsors');
 	sponsorImagesPremium.on('change', function(newValue) {
 		if (newValue) {
-			$('#logoSelector').html('');
+			$('#sponsorImageSelect').html('');
 			newValue.forEach(function(logo) {
-					$('#logoSelector')
+					$('#sponsorImageSelect')
 						.append($("<input></input>")
 							.attr("name",'sponsor')
 							.attr("type",'radio')
@@ -21,7 +21,7 @@ $(function() {
 							.append(' '+logo.base+'<br>');
 			});
 			
-			$('#logoSelector').append('<br><input type="submit" id="submitButton">');
+			$('#sponsorImageSelect').append('<br><input type="submit" id="submitButton">');
 			$('#submitButton').button();
 		}
 	});

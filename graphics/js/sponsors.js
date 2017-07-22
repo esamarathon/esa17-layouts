@@ -25,7 +25,11 @@ $(function() {
 	var sponsorImagesPremium = nodecg.Replicant('assets:premiumsponsors');
 	var currentPremiumSponsorImage = nodecg.Replicant('currentPremiumSponsorImage')
 	currentPremiumSponsorImage.on('change', function(newValue) {
-		if (newValue) {
+		if (newValue === 'none') {
+			changeSponsorImage(sponsorImageAreaPremium);
+		}
+		
+		else if (newValue) {
 			var url = '/assets/esa17-layouts/premiumsponsors/'+newValue;
 			changeSponsorImage(sponsorImageAreaPremium, url);
 		}
@@ -43,7 +47,7 @@ $(function() {
 		
 		element.append('<div class="sponsorLogo sponsorLogoNext"></div>');
 		
-		$('.sponsorLogoNext', element).css('background-image', 'url("'+assetURL+'")')
+		$('.sponsorLogoNext', element).css('background-image', (assetURL)?'url("'+assetURL+'")':'none');
 		
 		$('.sponsorLogoNext', element).animate({'opacity': '1'}, 500, 'linear', function() {
 			$('.sponsorLogoCurrent', element).remove();

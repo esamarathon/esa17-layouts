@@ -4,6 +4,8 @@ var needle = require('needle');
 /* Stuff copied from twitchapi.js file from nodecg-speedcontrol. */
 
 module.exports = function(nodecg) {
+	var moment = require('moment');
+	
 	var firstStream = true;
 	if (typeof nodecg.bundleConfig !== 'undefined' && nodecg.bundleConfig.secondStream)
 		firstStream = false;
@@ -27,20 +29,28 @@ module.exports = function(nodecg) {
 	getStreamInfo();
 	// Used to frequently get the details of a stream for use for layouts.
 	function getStreamInfo() {
-		var url = 'https://api.twitch.tv/kraken/streams/'+streamChannelIDs[streamIndex];
-		needle.get(url, requestOptions, function(err, response) {
-			if (handleResponse(err, response)) {
-				otherStreamCurrentDataReplicant.value = response.body;
-			}
-			
+		// Dirty hack to make sure 2nd stream isn't shown before it starts officially.
+		if (streamIndex === 1 && moment().unix() < 1500847200) {
+			otherStreamCurrentDataReplicant.value = {stream: null};
 			setTimeout(getStreamInfo, 60000);
-		});
+		}
+			
+		else {
+			var url = 'https://api.twitch.tv/kraken/streams/'+streamChannelIDs[streamIndex];
+			needle.get(url, requestOptions, function(err, response) {
+				if (handleResponse(err, response)) {
+					otherStreamCurrentDataReplicant.value = response.body;
+				}
+				
+				setTimeout(getStreamInfo, 60000);
+			});
+		}
 	}
 	
 	// Prints error details to the console if needed.
 	// true if no issues, false if there were any
 	function handleResponse(err, response) {
-		if (err || response.statusCode !== 200) {
+		if (err || response.statusCode !== 200 || !response.body) {
 			console.log('Error occurred in communication with twitch, look below');
 			console.log(err);
 			console.log(response.body);
