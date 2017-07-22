@@ -140,9 +140,10 @@ $(function() {
 		$('<div class="playerText">'+hostData.name+'</div>').appendTo(container);
 		
 		// If the host data has a region set, will show their flag too.
-		if (hostData.region)
+		if (hostData.region) {
 			var region = (hostData.region.indexOf('/') >= 0 && hostData.region.indexOf('GB') < 0) ? hostData.region.toLowerCase().substr(0,hostData.region.indexOf('/')) : hostData.region.toLowerCase();
 			var flagURL = 'https://www.speedrun.com/images/flags/'+region+'.png';
+		}
 		
 		if (flagURL) {
 			var flag = $('<img class="playerFlag">');

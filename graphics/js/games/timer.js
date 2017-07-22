@@ -42,9 +42,11 @@ $(function() {
 	
 	// Used to show finish timers for the specified index.
 	nodecg.listenFor('timerSplit', speedcontrolBundle, function(index) {
-		var container = finishTimeContainers.eq(index);
-		$('#finishTime', container).html(currentTime);
-		container.css('opacity', '100');
+		if (finishTimeContainers.length > 1) {
+			var container = finishTimeContainers.eq(index);
+			$('#finishTime', container).html(currentTime);
+			container.css('opacity', '100');
+		}
 	});
 	
 });
