@@ -127,6 +127,26 @@ $(function() {
 		nodecg.sendMessage('hideHosts');
 	});
 	
+	// Submit custom message.
+	$('#customMsgForm').submit(function(event) {
+		event.preventDefault();
+		var inputs = $('#customMsgForm').serializeArray();
+
+		$('#customMsgAlert').html('Sending...');
+		nodecg.sendMessage('newInfoBarCustomMessage', inputs[0].value);
+		$('#customMsgAlert').html('Sent!');
+		
+		$('#customMsgForm input').attr('disabled','disabled');
+		$('#customMsgForm input').css('opacity',0.5);
+		
+		setTimeout(function() {$('#customMsgAlert').html('');}, 5000);
+		
+		setTimeout(function() {
+			$('#customMsgForm input').removeAttr('disabled');
+			$('#customMsgForm input').css('opacity',1);
+		}, 60000);
+	});
+	
 	// Tries to find the specified user on speedrun.com and get their country/region.
 	// Only using username lookups for now, need to use both in case 1 doesn't work.
 	function getUserDataFromSpeedrunCom(username, callback) {

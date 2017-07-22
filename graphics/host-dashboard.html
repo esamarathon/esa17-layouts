@@ -12,18 +12,28 @@
 	<script src="js/host-dashboard.js"></script>
 </head>
 <body>
-	<div id="editHostsContainer">
-		<h1>Edit Hosts</h1>
-		<div id="helpMsg">Modify hosts below and click save to update the stored data. Flags are synced from speedrun.com automatically if they can be found. If hosts are currently being displayed on the layout, they will not update until the next time they are shown.</div>
-		<form id="hostsForm">
-			<div id="hostList">
-			</div>
-			<br>
-			<div id="bottomContainer">
-				<input type="button" id="addNew" value="Add New Blank User"> <input type="submit" value="Save"> <span id="bottomAlert"></span><br><br>
-				<span id="showHideButtons"><input type="button" id="showHosts" value="Show Hosts"> <input type="button" id="showHostsTemp" value="Show Hosts for 30 Seconds"> <input type="button" id="hideHosts" value="Hide Hosts"></span>
-			</div>
-		</form>
+	<div id="mainContainer">
+		<div id="editHostsContainer">
+			<h1>Edit Hosts</h1>
+			<div id="helpMsg">Modify hosts below and click save to update the stored data. Flags are synced from speedrun.com automatically if they can be found. If hosts are currently being displayed on the layout, they will not update until the next time they are shown.</div>
+			<form id="hostsForm">
+				<div id="hostList">
+				</div>
+				<br>
+				<div id="bottomContainer">
+					<input type="button" id="addNew" value="Add New Blank User"> <input type="submit" value="Save"> <span id="bottomAlert"></span><br><br>
+					<span id="showHideButtons"><input type="button" id="showHosts" value="Show Hosts"> <input type="button" id="showHostsTemp" value="Show Hosts for 30 Seconds"> <input type="button" id="hideHosts" value="Hide Hosts"></span>
+				</div>
+			</form>
+		</div>
+		<div id="customMsgContainer">
+			<h1>Custom Message</h1>
+			<form id="customMsgForm">
+				<div id="helpMsg">Send a custom message to the information bar at the bottom of the stream; it will appear once the current message disappear.</div>
+				<input type="text" name="customMsg" placeholder="Type custom message here..." class="customMsgBox"><br><br>
+				<input type="submit" value="Save"> <span id="customMsgAlert">
+			</form>
+		</div>
 	</div>
 </body>
 </html>

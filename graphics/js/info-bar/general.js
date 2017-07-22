@@ -85,6 +85,11 @@ $(function() {
 		}
 	});
 	
+	var customMessages = [];
+	nodecg.listenFor('newInfoBarCustomMessage', function(customMessage) {
+		customMessages.push(customMessage);
+	});
+	
 	var showingMessage = false;
 	var messageIndex = 0;
 	function showMessages() {
@@ -96,6 +101,11 @@ $(function() {
 			if (newDonations.length > 0) {
 				showDonation(true, newDonations[0]); // Show first donation.
 				newDonations.shift(); // Remove first donation.
+			}
+			
+			else if (customMessages.length > 0) {
+				showCustomMessage(customMessages[0]);
+				customMessages.shift(); // Remove first custom message.
 			}
 			
 			else {
@@ -244,6 +254,54 @@ $(function() {
 			
 			if (amountToScroll > 0) {
 				$('.altStreamWrapper .altStreamText').delay(2500).animate({'margin-left': '-'+amountToScroll+'px'}, timeToScrollFor, 'linear', function() {
+					if (timeToScrollFor < 10000) {
+						setTimeout(function() {showingMessage = false;}, 10000-timeToScrollFor);
+					}
+					
+					else showingMessage = false;
+				});
+			}
+			
+			else {
+				setTimeout(function() {showingMessage = false;}, 2500+timeToScrollFor);
+			}
+		});
+	}
+	
+	// Calls back when ready to be cleaned up on next tick.
+	function showCustomMessage(customMessage) {
+		showingMessage = true;
+		
+		// Fade out whatever was in the message wrapper before.
+		$('#messageWrapper').animate({'opacity': '0'}, 500, 'linear', function() {
+			// Clear up message wrapper from last use if needed.
+			$('#messageWrapper').removeClass();
+			$('#messageWrapper').addClass('customMsgWrapper');
+			
+			var html = customMessage;
+			
+			html = '<div class="customMsgText">'+html+'</div>';
+			
+			var amountToScroll = 0;
+			var timeToScrollFor = 10000; // 10 seconds default for donations that don't need to scroll.
+			
+			$('#messageWrapper').html(html);			
+			$('#messageWrapper').animate({'opacity': '1'}, 500, 'linear');
+			
+			// Find actual length of donation total element.
+			$('.customMsgWrapper .customMsgText').css('overflow-x', 'scroll');
+			var customMsgTextWidth = $('.customMsgWrapper .customMsgText')[0].scrollWidth;
+			$('.customMsgWrapper .customMsgText').css('overflow-x', 'hidden');
+			
+			var customMsgWrapperWidth = $('.customMsgWrapper').width();
+			
+			if (customMsgWrapperWidth < customMsgTextWidth) {
+				amountToScroll = customMsgTextWidth-customMsgWrapperWidth+10; //extra 10 for padding
+				timeToScrollFor = amountToScroll*10;
+			}
+			
+			if (amountToScroll > 0) {
+				$('.customMsgWrapper .customMsgText').delay(2500).animate({'margin-left': '-'+amountToScroll+'px'}, timeToScrollFor, 'linear', function() {
 					if (timeToScrollFor < 10000) {
 						setTimeout(function() {showingMessage = false;}, 10000-timeToScrollFor);
 					}

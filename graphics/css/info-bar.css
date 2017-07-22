@@ -123,6 +123,17 @@ body {
 	overflow-x: hidden;
 }
 
+.customMsgWrapper {
+	padding: 0 !important;
+	padding-left: 10px !important;
+}
+
+.customMsgWrapper, .customMsgText
+{
+	white-space: nowrap;
+	overflow-x: hidden;
+}
+
 /* Area for the clock. */
 #clockArea {
 	font-size: 35px;

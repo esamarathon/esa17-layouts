@@ -26,7 +26,7 @@ h1 {
 	padding-bottom: 15px;
 }
 
-#editHostsContainer {
+#mainContainer {
 	padding: 20px;
 	height: 100vh;
 	width: 800px;
@@ -51,4 +51,12 @@ h1 {
 	height: inherit;
 	display: none;
 	padding: 0 3px;
+}
+
+#customMsgContainer {
+	padding-top: 30px;
+}
+
+.customMsgBox {
+	width: 100%;
 }

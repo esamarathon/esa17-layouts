@@ -3,19 +3,23 @@ $(function() {
 	// JQuery selectors.
 	var sponsorImageAreaNormal = $('#sponsorImageAreaNormal');
 	
+	var onlyShowingPremium = false;
+	
 	if ($('#sponsorImageAreaTopPremium').length > 0)
 		var sponsorImageAreaPremium = $('#sponsorImageAreaTopPremium');
 	else if ($('#sponsorImageAreaPremium').length > 0)
 		var sponsorImageAreaPremium = $('#sponsorImageAreaPremium');
 	
-	if (!sponsorImageAreaPremium)
+	if (!sponsorImageAreaPremium && $('html').attr('data-sceneid') !== 'intermission-hosts') {
 		var sponsorImageAreaPremium = sponsorImageAreaNormal;
+		onlyShowingPremium = true;
+	}
 	
 	var sponsorRotationInit = false;
 	var sponsorImagesNormal = nodecg.Replicant('assets:normalsponsors');
 	var currentNormalSponsorImage;
 	sponsorImagesNormal.on('change', function(newValue) {
-		if (!sponsorRotationInit && newValue.length > 0) {
+		if (!onlyShowingPremium && !sponsorRotationInit && newValue.length > 0) {
 			setInterval(rotateNormal, 60000);
 			rotateNormal();
 			sponsorRotationInit = true;
