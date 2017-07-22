@@ -29,13 +29,15 @@ $(function() {
 	var sponsorImagesPremium = nodecg.Replicant('assets:premiumsponsors');
 	var currentPremiumSponsorImage = nodecg.Replicant('currentPremiumSponsorImage')
 	currentPremiumSponsorImage.on('change', function(newValue) {
-		if (newValue === 'none') {
-			changeSponsorImage(sponsorImageAreaPremium);
-		}
-		
-		else if (newValue) {
-			var url = '/assets/esa17-layouts/premiumsponsors/'+newValue;
-			changeSponsorImage(sponsorImageAreaPremium, url);
+		if (sponsorImageAreaPremium) {
+			if (newValue === 'none') {
+				changeSponsorImage(sponsorImageAreaPremium);
+			}
+			
+			else if (newValue) {
+				var url = '/assets/esa17-layouts/premiumsponsors/'+newValue;
+				changeSponsorImage(sponsorImageAreaPremium, url);
+			}
 		}
 	});
 	

@@ -18,7 +18,8 @@ $(function() {
 			var hostElement = $('<div class="hostInputContainer"><input type="text" name="hostName" placeholder="Username" value="'+user.name+'" class="hostInput"><img class="flag"><input type="button" class="removeUser" value="Remove"></div>');
 			
 			if (user.region) {
-				var flagURL = 'https://www.speedrun.com/images/flags/'+user.region.toLowerCase()+'.png';
+				var region = (user.region.indexOf('/') >= 0 && user.region.indexOf('GB') < 0) ? user.region.toLowerCase().substr(0,user.region.indexOf('/')) : user.region.toLowerCase();
+				var flagURL = 'https://www.speedrun.com/images/flags/'+region+'.png';
 				hostElement.find('.flag').attr('src', flagURL); // set flag image
 				hostElement.find('.flag').css('display', 'inline'); // unhide flags
 			}

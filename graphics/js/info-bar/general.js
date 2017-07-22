@@ -430,7 +430,8 @@ $(function() {
 		
 		// If a region was found, add their flag to the donation message.
 		if (region) {
-			var flagURL = 'https://www.speedrun.com/images/flags/'+region.toLowerCase()+'.png';
+			region = (region.indexOf('/') >= 0 && region.indexOf('GB') < 0) ? region.toLowerCase().substr(0,region.indexOf('/')) : region.toLowerCase();
+			var flagURL = 'https://www.speedrun.com/images/flags/'+region+'.png';
 			html += ' <img class="flag" src="'+flagURL+'">';
 		}
 		
