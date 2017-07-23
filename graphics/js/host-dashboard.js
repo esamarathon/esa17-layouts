@@ -61,14 +61,14 @@ $(function() {
 		
 		async.eachSeries(inputs, function(user, callback) {
 			// Allow people to specify regions manually in the format USER#REGION
-			var regexMatch = user.value.match(/[0-9a-zA-Z ]+(#[0-9a-zA-Z]+)/);
+			var regexMatch = user.value.match(/(.*)#([0-9a-zA-Z]+)/);
 			
 			// Ignore boxes that are blank.
 			if (user.value === '') callback();
 			
 			else if (regexMatch) {
-				var name = regexMatch[0];
-				var region = regexMatch[1].substring(1); // region really needs checking but is hard to
+				var name = regexMatch[1];
+				var region = regexMatch[2]; // region really needs checking but is hard to
 				
 				var hostDataObj = {name: name, region:region};
 				newHostData.push(hostDataObj);
