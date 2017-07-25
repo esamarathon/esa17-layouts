@@ -134,8 +134,8 @@ $(function() {
 		if (!previousRunData) var whenString = 'Next';
 		else {
 			var fullTime = whenTotal + previousRunData.estimateS + previousRunData.setupTimeS;
-			whenTotal = whenTotal+fullTime;
-			var formatted = moment().second(0).to(moment().second(fullTime), true);
+			whenTotal = fullTime;
+			var formatted = moment.utc().second(0).to(moment.utc().second(fullTime), true);
 			var whenString = 'In about '+formatted;
 		}
 		

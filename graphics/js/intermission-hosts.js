@@ -92,6 +92,14 @@ $(function() {
 	
 	var hostData = nodecg.Replicant('hostData', {defaultValue: []});
 	var hostDisplayStatus = nodecg.Replicant('hostDisplayStatus', {defaultValue: false});
+	hostData.on('change', function() {
+		if (hostDisplayStatus.value) {
+			hideHosts(function() {
+				showHosts();
+			});
+		}
+	});
+	
 	hostDisplayStatus.value = false; // make sure this is set correctly on page load
 	
 	var hostStatusChanging = false;
@@ -124,12 +132,13 @@ $(function() {
 		hostDisplayStatus.value = true;
 	}
 	
-	function hideHosts() {
+	function hideHosts(callback) {
 		hostStatusChanging = true;
 		clearTimeout(tempShowTimeout);
 		hostDisplayStatus.value = false;
 		hostsWrapper.animate({'opacity': '0'}, 500, 'linear', function() {
 			hostStatusChanging = false;
+			if (callback) callback();
 		});
 	}
 	
