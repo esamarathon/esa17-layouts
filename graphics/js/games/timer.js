@@ -48,5 +48,4 @@ $(function() {
 			container.css('opacity', '100');
 		}
 	});
-	
 });

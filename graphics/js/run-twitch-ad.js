@@ -1,6 +1,44 @@
 'use strict';
 $(function() {
 	var isOBS = (window.obsstudio) ? true : false;
+	var timerElement = $('#timer');
+	
+	var timerInterval;
+	nodecg.listenFor('twitchAdStarted', 'nodecg-speedcontrol', function() {
+		showCountdown();
+		timerInterval = setInterval(decreaseTimer, 1000);
+	});
+	
+	var secondsLeft;
+	function showCountdown() {
+		secondsLeft = 180; // 3 minutes
+		timerElement.html(msToTime(secondsLeft));
+		timerElement.css('opacity', '1');
+	}
+	function decreaseTimer() {
+		if (secondsLeft <= 0) {
+			clearInterval(timerInterval);
+			hideCountdown();
+		}
+		
+		else {
+			secondsLeft--;
+			timerElement.html(msToTime(secondsLeft));
+		}
+	}
+	function hideCountdown() {
+		timerElement.css('opacity', '0');
+	}
+	
+	function msToTime(duration) {
+		var seconds = parseInt((duration)%60),
+			minutes = parseInt((duration/(60))%60),
+			
+		minutes = (minutes < 10) ? minutes : minutes;
+		seconds = (seconds < 10) ? '0' + seconds : seconds;
+
+		return minutes + ':' + seconds;
+	}
 	
 	// For detecting when OBS can see the player.
 	if (isOBS) {
