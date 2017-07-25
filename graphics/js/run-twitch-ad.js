@@ -12,7 +12,7 @@ $(function() {
 	var secondsLeft;
 	function showCountdown() {
 		secondsLeft = 180; // 3 minutes
-		timerElement.html(msToTime(secondsLeft));
+		timerElement.html('Twitch Ads Running: '+msToTime(secondsLeft));
 		timerElement.css('opacity', '1');
 	}
 	function decreaseTimer() {
@@ -23,7 +23,7 @@ $(function() {
 		
 		else {
 			secondsLeft--;
-			timerElement.html(msToTime(secondsLeft));
+			timerElement.html('Twitch Ads Running: '+msToTime(secondsLeft));
 		}
 	}
 	function hideCountdown() {
