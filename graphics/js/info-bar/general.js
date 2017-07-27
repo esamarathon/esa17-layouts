@@ -50,7 +50,11 @@ $(function() {
 		// If we're not showing the "Save the Children" text and donation total has changed.
 		if (!showingSTCText && lastCheckDonationTotal && lastCheckDonationTotal !== currentDonationTotal) {
 			// If the page has just been loaded, just print the current value.
-			if (!currentDonationTotal) donationTotalElement.html('$' + lastCheckDonationTotal.toFixed(2));
+			if (!currentDonationTotal) {
+				var value = lastCheckDonationTotal.toLocaleString('en-US', {minimumFractionDigits: 0});
+				donationTotalElement.html('$'+value);
+			}
+			
 			else animationUpdateDonationTotal(donationTotalElement, currentDonationTotal, lastCheckDonationTotal);
 			currentDonationTotal = lastCheckDonationTotal;
 		}

@@ -17,14 +17,14 @@ function animationFadeOutInElements(selector1, selector2) {
 // Animation lasts under 1 tick (5s) so no extra callbacks are needed.
 function animationUpdateDonationTotal(selector, oldValue, newValue) {
 	$(selector)
-	.prop('number', oldValue*100)
+	.prop('number', oldValue)
 	.animateNumber({
-		number: newValue*100,
+		number: newValue,
 		numberStep: function(now, tween) {
-			var flooredNumber = Math.floor(now)/100;
+			var flooredNumber = Math.floor(now);
 			var target = $(tween.elem);
-			flooredNumber = flooredNumber.toFixed(2);
-			target.html('$'+flooredNumber);
+			var value = flooredNumber.toLocaleString('en-US', {minimumFractionDigits: 0});
+			target.html('$'+value);
 		}
 	}, 4000, 'linear');
 }

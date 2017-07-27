@@ -16,8 +16,10 @@ $(function() {
 	var webcamHeaderText = $('#webcamHeaderText');
 	
 	// Declaring other variables.
+	var isOBS = (window.obsstudio) ? true : false;
 	var init = false;
-	var whenTotal = 0; // Totals all the estimates for calculating the "in about X" lines.
+	var next4Runs = [];
+	var refreshingNextGames = false;
 	
 	var streamLive = false;
 	var otherStreamCurrentDataReplicant = nodecg.Replicant('otherStreamCurrentData', {persistent:false});
@@ -77,45 +79,54 @@ $(function() {
 		});
 	});
 	
+	if (isOBS) {
+		window.obsstudio.onActiveChange = function(active) {
+			if (active) {
+				updateComingUpRuns();
+			}
+		};
+	}
+	
 	var runDataArrayReplicant = nodecg.Replicant('runDataArray', speedcontrolBundle);
 	var runDataActiveRunReplicant = nodecg.Replicant('runDataActiveRun', speedcontrolBundle);
 	runDataActiveRunReplicant.on('change', function(newValue, oldValue) {
 		if (!init) {
 			init = true;
 			refreshComingUpRunsData();
+			updateComingUpRuns();
 		}
 	});
 	
 	nodecg.listenFor('forceRefreshIntermission', speedcontrolBundle, function() {
 		refreshComingUpRunsData();
+		if (!isOBS) updateComingUpRuns();
 	});
 	
 	function refreshComingUpRunsData() {
 		// Checks if the run data array is actually imported yet by checking if it's an array.
-		if ($.isArray(runDataArrayReplicant.value)) {
+		if ($.isArray(runDataArrayReplicant.value) && !refreshingNextGames) {
+			refreshingNextGames = true;
 			var indexOfCurrentRun = findIndexInRunDataArray(runDataActiveRunReplicant.value, runDataArrayReplicant.value);
-			var next4Runs = [];
+			next4Runs = [];
 			for (var i = 1; i <= 4; i++) {
 				if (!runDataArrayReplicant.value[indexOfCurrentRun+i]) break;
 				next4Runs.push(runDataArrayReplicant.value[indexOfCurrentRun+i]);
 			}
-			
-			updateComingUpRuns(next4Runs);
+			refreshingNextGames = false;
 		}
 	}
 	
 	// Set information on the layout for upcoming runs.
-	function updateComingUpRuns(next4Runs) {
-		// Reset important stuff.
-		whenTotal = 0;
-		
+	function updateComingUpRuns() {
+		var whenTotal = [0]; // Totals all the estimates for calculating the "in about X" lines.
+		 
 		// Fade out.
 		comingUpRunsBox.animate({'opacity': '0'}, 500, 'linear', function() {
 			comingUpRunsBox.html(''); // Clears out old boxes, if needed.
 			
 			// Create containers for all the runs.
 			for (var i = 0; i < next4Runs.length; i++) {
-				var container = createComingUpRunContainer(next4Runs[i], next4Runs[i-1]);
+				var container = createComingUpRunContainer(next4Runs[i], next4Runs[i-1], whenTotal);
 				container.appendTo(comingUpRunsBox);
 			}
 			
@@ -125,18 +136,20 @@ $(function() {
 	}
 	
 	// Creates the HTML box element to be inserted on the page.
-	function createComingUpRunContainer(runData, previousRunData) {
+	function createComingUpRunContainer(runData, previousRunData, whenTotal) {
 		var container = $('<div class="comingUpRunContainer storageBox flexContainer"></div>');
 		
 		// An extra div is needed to make sure all of these are on individual lines.
 		var divWrapper = $('<div></div>');
 		
-		if (!previousRunData) var whenString = 'Next';
+		var whenString = '';
+		if (!previousRunData) whenString = 'Next';
 		else {
-			var fullTime = whenTotal + previousRunData.estimateS + previousRunData.setupTimeS;
-			whenTotal = fullTime;
-			var formatted = moment.utc().second(0).to(moment.utc().second(fullTime), true);
-			var whenString = 'In about '+formatted;
+			var runTime = previousRunData.estimateS + previousRunData.setupTimeS;
+			var formatted = moment.utc().second(0).to(moment.utc().second(whenTotal[0]+runTime), true);
+			//whenString = 'In about '+msToTime(whenTotal[0]+runTime);
+			whenString = 'In about '+formatted;
+			whenTotal[0] += runTime;
 		}
 		
 		$('<div id="gameWhen">'+whenString+'</div>').appendTo(divWrapper);
@@ -156,5 +169,15 @@ $(function() {
 		divWrapper.appendTo(container);
 		
 		return container;
+	}
+	
+	function msToTime(duration) {
+		var minutes = parseInt((duration / 60) % 60);
+		var hours = parseInt(duration / (3600));
+		
+		hours = (hours === 0) ? '' : (hours > 1)?hours+' hours ':hours+' hour ';
+		minutes = (minutes === 0) ? '' : (minutes > 1)?minutes+' minutes ':minutes+' minute';
+		
+		return hours + minutes;
 	}
 });
