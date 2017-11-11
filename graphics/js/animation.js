@@ -39,8 +39,7 @@ function animationCleanPlayerData(selector) {
 function animationChangePlayerData(selector, playerData, twitch, hideCoop, showCoop) {
 	// Get a URL for flag image if region is set, if old and new URL are the same, nothing is done.
 	if (playerData.region) {
-		var region = (playerData.region.indexOf('/') >= 0 && playerData.region.indexOf('GB') < 0) ? playerData.region.toLowerCase().substr(0,playerData.region.indexOf('/')) : playerData.region.toLowerCase();
-		var flagURL = 'https://www.speedrun.com/images/flags/'+region+'.png';
+		var flagURL = 'https://www.speedrun.com/images/flags/'+playerData.region.toLowerCase()+'.png';
 	}
 	var leaveFlag = $('.playerFlag', selector).attr('src') === flagURL;
 	

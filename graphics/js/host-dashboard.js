@@ -18,8 +18,7 @@ $(function() {
 			var hostElement = $('<div class="hostInputContainer"><input type="text" name="hostName" placeholder="Username" value="'+user.name+'" class="hostInput"><img class="flag"><input type="button" class="removeUser" value="Remove"></div>');
 			
 			if (user.region) {
-				var region = (user.region.indexOf('/') >= 0 && user.region.indexOf('GB') < 0) ? user.region.toLowerCase().substr(0,user.region.indexOf('/')) : user.region.toLowerCase();
-				var flagURL = 'https://www.speedrun.com/images/flags/'+region+'.png';
+				var flagURL = 'https://www.speedrun.com/images/flags/'+user.region.toLowerCase()+'.png';
 				hostElement.find('.flag').attr('src', flagURL); // set flag image
 				hostElement.find('.flag').css('display', 'inline'); // unhide flags
 			}
@@ -169,7 +168,7 @@ $(function() {
 		async.waterfall([
 			function(callback) {
 				if (username) {
-					var url = 'http://www.speedrun.com/api/v1/users?max=1&lookup='+username.toLowerCase();
+					var url = 'https://www.speedrun.com/api/v1/users?max=1&lookup='+username.toLowerCase();
 					querySRComForUserData(url, function(name, regionCode) {
 						if (name) foundName = name;
 						if (regionCode) foundRegion = regionCode;
@@ -197,10 +196,7 @@ $(function() {
 					foundName = data.data[0].names.international;
 					
 					if (data.data[0].location) {
-						if (data.data[0].location.region)
-							foundRegion = data.data[0].location.region.code;
-						else
-							foundRegion = data.data[0].location.country.code;
+						foundRegion = data.data[0].location.country.code;
 					}
 				}
 				

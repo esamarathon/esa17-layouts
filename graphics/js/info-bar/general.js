@@ -424,18 +424,14 @@ $(function() {
 		if (isNew) html += '<span class="donationTitle">New Donation:</span> ';
 		html += donationUser+' ('+donationAmount+')';
 		
-		// Checks if the user who donated has a region set.
+		// Checks if the user who donated has a location set.
 		if (donationObj.user && donationObj.user.data.location) {
-			if (donationObj.user.data.location.region)
-				var region = donationObj.user.data.location.region.code;
-			else
-				var region = donationObj.user.data.location.country.code;
+			var region = donationObj.user.data.location.country.code;
 		}
 		
 		// If a region was found, add their flag to the donation message.
 		if (region) {
-			region = (region.indexOf('/') >= 0 && region.indexOf('GB') < 0) ? region.toLowerCase().substr(0,region.indexOf('/')) : region.toLowerCase();
-			var flagURL = 'https://www.speedrun.com/images/flags/'+region+'.png';
+			var flagURL = 'https://www.speedrun.com/images/flags/'+region.toLowerCase()+'.png';
 			html += ' <img class="flag" src="'+flagURL+'">';
 		}
 		
